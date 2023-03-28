@@ -22,7 +22,8 @@ const fontWeight = {
 const borderRadius = {
   input: "17px",
   button: "15px",
-  imgCard: "10px",
+  uiCard: "10px"
+  
 };
 
 export type ColorsTypes = typeof color;
