@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import google_btn from "public/google_btn.png";
-import appstore from "public/appstore.png";
+import google_btn from "public/assets/images/google_btn.png";
+import appstore from "public/assets/images/appstore.png";
 
 function Login() {
   return (
