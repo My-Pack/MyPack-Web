@@ -3,6 +3,7 @@ import GlobalStyle from "styles/GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import theme from "styles/Theme/theme";
 import Head from "next/head";
+import { RecoilRoot } from "recoil";
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -10,10 +11,12 @@ function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <RecoilRoot>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </RecoilRoot>
     </>
   );
 }
