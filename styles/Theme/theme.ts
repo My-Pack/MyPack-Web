@@ -10,6 +10,7 @@ const color = {
   grey500: "#6e6e6e",
   borderBackground: "#2e2c2c",
   borderGrey: "#707070",
+  glass: "rgba(0,0,0,0)",
 };
 
 const fontWeight = {
@@ -22,8 +23,7 @@ const fontWeight = {
 const borderRadius = {
   input: "17px",
   button: "15px",
-  uiCard: "10px"
-  
+  uiCard: "10px",
 };
 
 export type ColorsTypes = typeof color;
