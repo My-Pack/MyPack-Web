@@ -1,15 +1,12 @@
 import { DefaultTheme } from "styled-components";
 
 const color = {
-  white: "#ffffff", // text color
+  white: "#ffffff",
   black: "#000000",
-  background: "#ffffff", // screen background
-  blueGreen: "#3484a8", // 청록
-  grey: "#353535", // input, buttomNavbar color
+  background: "#202124",
+  grey: "#353535",
   grey100: "#808080",
   grey500: "#6e6e6e",
-  borderBackground: "#2e2c2c",
-  borderGrey: "#707070",
 };
 
 const fontWeight = {
@@ -22,8 +19,7 @@ const fontWeight = {
 const borderRadius = {
   input: "17px",
   button: "15px",
-  uiCard: "10px"
-  
+  uiCard: "10px",
 };
 
 export type ColorsTypes = typeof color;
