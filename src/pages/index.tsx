@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Hamberger from "src/components/Hamberger";
+import Hamburger from "src/components/Hamburger";
 import styled, { css } from "styled-components";
 
 function Home() {
@@ -13,7 +13,7 @@ function Home() {
       </Head>
       <div>Home</div>
       <StyledHambergerWrapper>
-        <Hamberger />
+        <Hamburger />
       </StyledHambergerWrapper>
     </>
   );

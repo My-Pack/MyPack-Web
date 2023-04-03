@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-
-function Hamberger() {
+function Hamburger() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const onClickHamberger = () => {
+  const onClickHamburger = () => {
     setIsOpen(!isOpen);
   };
   return (
     <>
-      <StyledMenuWrapper onClick={onClickHamberger}>
-        <StyledHamberger isOpen={isOpen} />
+      <StyledMenuWrapper onClick={onClickHamburger}>
+        <Styledhamburger isOpen={isOpen} />
       </StyledMenuWrapper>
       <StyledMenuListWrapper isOpen={isOpen}>
         <StyledMenuElement>내 정보</StyledMenuElement>
@@ -21,7 +20,7 @@ function Hamberger() {
   );
 }
 
-export default Hamberger;
+export default Hamburger;
 
 const StyledMenuElement = styled.p`
   font-size: 1.56rem;
@@ -56,7 +55,7 @@ const StyledMenuWrapper = styled.div`
   height: 1.8rem;
   z-index: 1000;
 `;
-const StyledHamberger = styled.div<{ isOpen: boolean }>`
+const Styledhamburger = styled.div<{ isOpen: boolean }>`
   position: relative;
   display: inline-block;
   left: 0;

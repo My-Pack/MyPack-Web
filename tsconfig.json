@@ -21,7 +21,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.*.tsx",
-    "tests/index/Hamberger.test.js"
+    "tests/index/Hamburger.test.js"
   ],
   "exclude": ["node_modules"]
 }
