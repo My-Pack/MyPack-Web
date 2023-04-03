@@ -7,15 +7,55 @@ function Hamberger() {
     setIsOpen(!isOpen);
   };
   return (
-    <StyledMenuWrapper onClick={onClickHamberger}>
-      <StyledHamberger isOpen={isOpen} />
-    </StyledMenuWrapper>
+    <>
+      <StyledMenuWrapper onClick={onClickHamberger}>
+        <StyledHamberger isOpen={isOpen} />
+      </StyledMenuWrapper>
+      <StyledMenuListWrapper isOpen={isOpen}>
+        <StyledMenuElement>내 정보</StyledMenuElement>
+        <StyledMenuElement>알림</StyledMenuElement>
+        <StyledMenuElement>나중에 추가</StyledMenuElement>
+        <StyledMenuElement>나중에 추가</StyledMenuElement>
+      </StyledMenuListWrapper>
+    </>
   );
 }
 
 export default Hamberger;
 
-const StyledMenuWrapper = styled.div``;
+const StyledMenuElement = styled.p`
+  font-size: 1.56rem;
+  color: ${({ theme }) => theme.color.black};
+  font-weight: 400;
+  cursor: pointer;
+`;
+
+const StyledMenuListWrapper = styled.div<{ isOpen: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+  width: 25vw;
+  height: 100vh;
+  background-color: #0000001d;
+  position: fixed;
+  transition: right 0.8s ease;
+
+  right: ${({ isOpen }) =>
+    isOpen
+      ? 0
+      : "-30vw"}; // 창 크기 조절시 보이는 문제가 있어 의도적으로 멀리 두었습니다.
+  top: 0;
+  z-index: 999;
+`;
+
+const StyledMenuWrapper = styled.div`
+  cursor: pointer;
+  position: relative;
+  height: 1.8rem;
+  z-index: 1000;
+`;
 const StyledHamberger = styled.div<{ isOpen: boolean }>`
   position: relative;
   display: inline-block;
@@ -44,7 +84,8 @@ const StyledHamberger = styled.div<{ isOpen: boolean }>`
   }
   &::before {
     top: ${(props) => (props.isOpen ? "0" : "-0.75rem")};
-    transform: ${(props) => (props.isOpen ? "rotate(135deg)" : "rotate(0)")};
+    transform: ${(props) =>
+      props.isOpen ? "rotate(135deg)" : "rotate(0)"}; // 225
   }
   &::after {
     top: ${(props) => (props.isOpen ? "0" : "0.75rem")};
