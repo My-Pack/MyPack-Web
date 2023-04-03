@@ -6,7 +6,11 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: "Noto Sans KR", sans-serif;
-
     }
+
+    html, body {
+    background-color: ${({ theme }) => theme.color.background};
+    color: ${({ theme }) => theme.color.white};
+  }
 `;
 export default GlobalStyle;
