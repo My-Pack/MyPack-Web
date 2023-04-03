@@ -7,6 +7,9 @@ const color = {
   grey: "#353535",
   grey100: "#808080",
   grey500: "#6e6e6e",
+  borderBackground: "#2e2c2c",
+  borderGrey: "#707070",
+  glass: "rgba(0,0,0,0)",
 };
 
 const fontWeight = {
