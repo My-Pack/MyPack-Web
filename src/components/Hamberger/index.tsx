@@ -25,7 +25,7 @@ export default Hamberger;
 
 const StyledMenuElement = styled.p`
   font-size: 1.56rem;
-  color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.color.white};
   font-weight: 400;
   cursor: pointer;
 `;
@@ -38,7 +38,7 @@ const StyledMenuListWrapper = styled.div<{ isOpen: boolean }>`
   gap: 10%;
   width: 25vw;
   height: 100vh;
-  background-color: #0000001d;
+  background-color: #83838321;
   position: fixed;
   transition: right 0.8s ease;
 
@@ -69,7 +69,7 @@ const StyledHamberger = styled.div<{ isOpen: boolean }>`
           ${({ theme }) => theme.color.glass}
         `
       : css`
-          ${({ theme }) => theme.color.black};
+          ${({ theme }) => theme.color.white};
         `};
   &::before,
   &::after {
@@ -77,7 +77,7 @@ const StyledHamberger = styled.div<{ isOpen: boolean }>`
     position: absolute;
     display: inline-block;
     left: 0;
-    background-color: ${({ theme }) => theme.color.black};
+    background-color: ${({ theme }) => theme.color.white};
     width: 1.8rem;
     height: 0.15rem;
     transition: all 0.8s;
