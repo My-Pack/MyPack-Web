@@ -32,7 +32,7 @@ const StyledLoginWrapper = styled.div`
   width: 18.75rem;
   height: 25rem;
   border-radius: ${({ theme }) => theme.borderRadius.uiCard};
-  background-color: ${({ theme }) => theme.color.white};
+  background-color: rgba(0, 0, 0, 0.293);
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
@@ -42,6 +42,7 @@ const StyledLoginWrapper = styled.div`
     0 -6px 16px -6px rgba(0, 0, 0, 0.025);
   h1 {
     font-weight: 350;
+    color: ${({ theme }) => theme.color.white};
   }
   .login {
     display: flex;
