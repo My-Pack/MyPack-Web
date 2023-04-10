@@ -10,14 +10,14 @@ function Login() {
     <StyledBackground>
       <StyledLoginWrapper>
         <h1>MyPack</h1>
-        <AccountCrop>
+        <StyledAccountCrop>
           <Image
             src={account}
             alt="account"
             width={300}
-            style={{ position: "relative", top: -65, left: -65 }}
+            style={{ position: "relative" }}
           />
-        </AccountCrop>
+        </StyledAccountCrop>
         {/* 임시 로고  */}
 
         <Image src={google_btn} alt="google_login" width={200} />
@@ -30,7 +30,10 @@ function Login() {
 
 export default Login;
 
-const AccountCrop = styled.div`
+const StyledAccountCrop = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: 170px; // 자를 사이즈를 명시해준다.
   height: 170px;
