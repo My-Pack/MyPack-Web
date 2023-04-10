@@ -3,12 +3,21 @@ import styled from "styled-components";
 import Image from "next/image";
 import google_btn from "public/assets/images/google_btn.png";
 import appstore from "public/assets/images/appstore.png";
+import account from "public/assets/images/account_clay.png";
 
 function Login() {
   return (
     <StyledBackground>
       <StyledLoginWrapper>
         <h1>MyPack</h1>
+        <AccountCrop>
+          <Image
+            src={account}
+            alt="account"
+            width={300}
+            style={{ position: "relative", top: -65, left: -65 }}
+          />
+        </AccountCrop>
         {/* 임시 로고  */}
 
         <Image src={google_btn} alt="google_login" width={200} />
@@ -21,6 +30,12 @@ function Login() {
 
 export default Login;
 
+const AccountCrop = styled.div`
+  position: relative;
+  width: 170px; // 자를 사이즈를 명시해준다.
+  height: 170px;
+  overflow: hidden;
+`;
 const StyledBar = styled.div`
   height: 0.0625rem;
   width: 6.125rem;
@@ -32,7 +47,7 @@ const StyledLoginWrapper = styled.div`
   width: 18.75rem;
   height: 25rem;
   border-radius: ${({ theme }) => theme.borderRadius.uiCard};
-  background-color: ${({ theme }) => theme.color.white};
+  background-color: rgba(0, 0, 0, 0.293);
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
@@ -42,6 +57,7 @@ const StyledLoginWrapper = styled.div`
     0 -6px 16px -6px rgba(0, 0, 0, 0.025);
   h1 {
     font-weight: 350;
+    color: ${({ theme }) => theme.color.white};
   }
   .login {
     display: flex;
