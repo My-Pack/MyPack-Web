@@ -9,7 +9,7 @@ const color = {
   grey500: "#6e6e6e",
   borderBackground: "#2e2c2c",
   borderGrey: "#707070",
-  glass: "rgba(0,0,0,0)",
+  glass: "rgba(0,0,0,0)", //투명
 };
 
 const fontWeight = {
