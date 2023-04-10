@@ -1,17 +1,16 @@
 import styled from "styled-components";
 
-function Card() {
-  return <StyledCardWrapper>card</StyledCardWrapper>;
+function CardItem() {
+  return <StyledCard>card</StyledCard>;
 }
 
-export default Card;
+export default CardItem;
 
-const StyledCardWrapper = styled.div`
+const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
-
-  width: 18.75rem;
-  height: 25rem;
+  width: 19rem;
+  height: 25.7rem;
   border-radius: 20px;
   padding: 1rem 2rem;
   border: 1px solid rgba(200 200 200 / 0.2);
