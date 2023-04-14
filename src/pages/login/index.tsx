@@ -4,6 +4,7 @@ import Image from "next/image";
 import google_btn from "public/assets/images/google_login.png";
 import appstore from "public/assets/images/apple_login.png";
 import account from "public/assets/images/account_clay.png";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import LoginBack from "../../components/LoginBack";
 
 function Login() {
@@ -22,7 +23,14 @@ function Login() {
         </StyledAccountCrop>
         {/* 임시 로고  */}
         <div className="login">
-          <Image src={google_btn} alt="google_login" width={200} />
+          <GoogleOAuthProvider
+            clientId={process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string}
+          >
+            <GoogleLogin
+              onSuccess={(response: any) => console.log(response)}
+              onError={() => console.log("Error ")}
+            />
+          </GoogleOAuthProvider>
 
           <Image src={appstore} alt="appstore" width={200} />
         </div>
