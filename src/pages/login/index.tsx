@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import google_btn from "public/assets/images/google_login.png";
-import appstore from "public/assets/images/apple_login.png";
-import account from "public/assets/images/account_clay.png";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import LoginBack from "../../components/LoginBack";
+import appstore from "public/assets/images/appleLogin.png";
+import account from "public/assets/images/accountClay.png";
+import {
+  GoogleLogin,
+  GoogleOAuthProvider,
+  CredentialResponse,
+} from "@react-oauth/google";
+import LoginBack from "src/components/LoginBack";
 
 function Login() {
   return (
@@ -27,7 +30,9 @@ function Login() {
             clientId={process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string}
           >
             <GoogleLogin
-              onSuccess={(response: any) => console.log(response)}
+              onSuccess={(response: CredentialResponse) =>
+                console.log(response)
+              }
               onError={() => console.log("Error ")}
             />
           </GoogleOAuthProvider>
