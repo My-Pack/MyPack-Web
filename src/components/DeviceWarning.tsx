@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import googlePlayBadge from "public/assets/images/googlePlayBadge.png";
+import appStore from "public/assets/images/appStore.svg";
 import styled from "styled-components";
 
 function DeviceWarning() {
@@ -18,11 +18,7 @@ function DeviceWarning() {
           <StyledItem>
             <StyledImgWrapper>
               <Link href="/">
-                <Image
-                  src={googlePlayBadge}
-                  alt="googlePlayBadge_Image"
-                  layout="fill"
-                />
+                <Image src={appStore} alt="appStore_Image" layout="fill" />
               </Link>
             </StyledImgWrapper>
           </StyledItem>
