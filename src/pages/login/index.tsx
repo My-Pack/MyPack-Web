@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import google_btn from "public/assets/images/google_btn.png";
-import appstore from "public/assets/images/appstore.png";
+import google_btn from "public/assets/images/google_login.png";
+import appstore from "public/assets/images/apple_login.png";
 import account from "public/assets/images/account_clay.png";
 
 function Login() {
@@ -19,10 +19,11 @@ function Login() {
           />
         </StyledAccountCrop>
         {/* 임시 로고  */}
+        <div className="login">
+          <Image src={google_btn} alt="google_login" width={200} />
 
-        <Image src={google_btn} alt="google_login" width={200} />
-
-        <Image src={appstore} alt="appstore" width={120} />
+          <Image src={appstore} alt="appstore" width={200} />
+        </div>
       </StyledLoginWrapper>
     </StyledBackground>
   );
@@ -67,6 +68,7 @@ const StyledLoginWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     color: #b2b1b1;
+    gap: 0.3rem;
   }
   .or {
     display: flex;
