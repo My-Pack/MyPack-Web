@@ -4,10 +4,12 @@ import Image from "next/image";
 import google_btn from "public/assets/images/google_login.png";
 import appstore from "public/assets/images/apple_login.png";
 import account from "public/assets/images/account_clay.png";
+import LoginBack from "../../components/LoginBack";
 
 function Login() {
   return (
-    <StyledBackground>
+    <div>
+      <LoginBack />
       <StyledLoginWrapper>
         <h1>MyPack</h1>
         <StyledAccountCrop>
@@ -25,7 +27,7 @@ function Login() {
           <Image src={appstore} alt="appstore" width={200} />
         </div>
       </StyledLoginWrapper>
-    </StyledBackground>
+    </div>
   );
 }
 
@@ -40,14 +42,15 @@ const StyledAccountCrop = styled.div`
   height: 170px;
   overflow: hidden;
 `;
-const StyledBar = styled.div`
-  height: 0.0625rem;
-  width: 6.125rem;
-  background-color: #b2b1b1;
-`;
 
 const StyledLoginWrapper = styled.div`
   display: flex;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
   width: 18.75rem;
   height: 25rem;
   border-radius: ${({ theme }) => theme.borderRadius.uiCard};
