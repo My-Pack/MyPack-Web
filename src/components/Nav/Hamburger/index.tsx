@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+
 function Hamburger() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onClickHamburger = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <>
       <StyledMenuWrapper onClick={onClickHamburger}>
@@ -55,6 +57,7 @@ const StyledMenuWrapper = styled.div`
   height: 1.8rem;
   z-index: 1000;
 `;
+
 const Styledhamburger = styled.div<{ isOpen: boolean }>`
   position: relative;
   display: inline-block;
