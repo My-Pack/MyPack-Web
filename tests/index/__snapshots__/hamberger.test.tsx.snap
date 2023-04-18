@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hamburger snapshot test 1`] = `
+<div>
+  <div
+    class="sc-75cb3926-2 eFkHLf"
+  >
+    <div
+      class="sc-75cb3926-3 YhBch"
+    />
+  </div>
+  <div
+    class="sc-75cb3926-1 iVYOqf"
+  >
+    <p
+      class="sc-75cb3926-0 jtANJk"
+    >
+      내 정보
+    </p>
+    <p
+      class="sc-75cb3926-0 jtANJk"
+    >
+      알림
+    </p>
+    <p
+      class="sc-75cb3926-0 jtANJk"
+    >
+      나중에 추가
+    </p>
+    <p
+      class="sc-75cb3926-0 jtANJk"
+    >
+      나중에 추가
+    </p>
+  </div>
+</div>
+`;
