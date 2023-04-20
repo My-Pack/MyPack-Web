@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+
 function Hamburger() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onClickHamburger = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <>
       <StyledMenuWrapper onClick={onClickHamburger}>
