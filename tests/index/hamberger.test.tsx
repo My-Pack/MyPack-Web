@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Hamburger from "src/components/Hamburger";
+import Hamburger from "src/components/Nav/Hamburger";
 import { ThemeProvider } from "styled-components";
 import theme from "styles/Theme/theme";
 
