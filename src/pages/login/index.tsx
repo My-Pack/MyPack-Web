@@ -10,16 +10,18 @@ import {
 } from "@react-oauth/google";
 import LoginBack from "src/components/LoginBack";
 import { instance } from "src/libs/api/api";
+import { useRouter } from "next/router";
 
 //로그인 api
 
 // refrash api
-function onLoginSuccess(response: CredentialResponse) {
+function onLoginSuccess(response: CredentialResponse, route: any) {
   instance
     .post("/api/v1/auth/google", response)
     .then((res: any) => {
       localStorage.setItem("accessToken", res.accessToken);
       localStorage.setItem("refreshToken", res.refreshToken);
+      route.push("/");
     })
     .catch((err: any) => {
       console.log(err);
@@ -29,6 +31,7 @@ function onLoginSuccess(response: CredentialResponse) {
 }
 
 function Login() {
+  const route = useRouter();
   return (
     <div>
       <LoginBack />
@@ -49,7 +52,7 @@ function Login() {
           >
             <GoogleLogin
               onSuccess={(response: CredentialResponse) =>
-                onLoginSuccess(response)
+                onLoginSuccess(response, route)
               }
               onError={() => alert("Error ")}
             />
