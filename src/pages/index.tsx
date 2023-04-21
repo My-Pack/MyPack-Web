@@ -1,19 +1,11 @@
-import CardEffectItem from "src/components/Card/CardEffectItem";
-import Hamburger from "src/components/Hamburger";
+import Nav from "src/components/Nav";
 import styled from "styled-components";
 
 function Home() {
   return (
-    <>
-      <StyledWrapper>
-        <StyledHambergerWrapper>
-          <Hamburger />
-        </StyledHambergerWrapper>
-        <StyledCardWrapper>
-          <CardEffectItem />
-        </StyledCardWrapper>
-      </StyledWrapper>
-    </>
+    <StyledWrapper>
+      <Nav />
+    </StyledWrapper>
   );
 }
 
@@ -27,16 +19,16 @@ const StyledWrapper = styled.div`
   display: flex;
 `;
 
-const StyledHambergerWrapper = styled.div`
-  position: fixed;
-  right: 20px;
-`;
+// const StyledHambergerWrapper = styled.div`
+//   position: fixed;
+//   right: 20px;
+// `;
 
-const StyledCardWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
+// const StyledCardWrapper = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: center;
+// `;
