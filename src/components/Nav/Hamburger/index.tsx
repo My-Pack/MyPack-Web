@@ -57,6 +57,7 @@ const StyledMenuWrapper = styled.div`
   height: 1.8rem;
   z-index: 1000;
 `;
+
 const Styledhamburger = styled.div<{ isOpen: boolean }>`
   position: relative;
   display: inline-block;
