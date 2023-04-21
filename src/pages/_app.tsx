@@ -6,6 +6,8 @@ import useMediaQuery from "src/hooks/useMediaQuery";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "styles/GlobalStyle";
 import theme from "styles/Theme/theme";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App({ Component, pageProps }: AppProps) {
   const isMobile = useMediaQuery(769);
@@ -20,7 +22,9 @@ function App({ Component, pageProps }: AppProps) {
         <ThemeProvider theme={theme}>
           <GlobalStyle />
           {isMobile ? <DeviceWarning /> : ""}
-          <Component {...pageProps} />
+          <DndProvider backend={HTML5Backend}>
+            <Component {...pageProps} />
+          </DndProvider>
         </ThemeProvider>
       </RecoilRoot>
     </>
