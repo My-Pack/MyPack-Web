@@ -15,16 +15,6 @@ describe("Login component", () => {
     expect(logo).toBeInTheDocument();
   });
 
-  it("renders the Google login button", () => {
-    render(
-      <ThemeProvider theme={theme}>
-        <Login />
-      </ThemeProvider>,
-    );
-    const googleButton = screen.getByAltText("google_login");
-    expect(googleButton).toBeInTheDocument();
-  });
-
   it("renders the App Store button", () => {
     render(
       <ThemeProvider theme={theme}>

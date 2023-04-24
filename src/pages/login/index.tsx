@@ -9,8 +9,29 @@ import {
   CredentialResponse,
 } from "@react-oauth/google";
 import LoginBack from "src/components/LoginBack";
+import { instance } from "src/libs/api/api";
+import { useRouter } from "next/router";
+
+//로그인 api
+
+// refrash api
+function onLoginSuccess(response: CredentialResponse, route: any) {
+  instance
+    .post("/api/v1/auth/google", response)
+    .then((res: any) => {
+      localStorage.setItem("accessToken", res.accessToken);
+      localStorage.setItem("refreshToken", res.refreshToken);
+      route.push("/");
+    })
+    .catch((err: any) => {
+      console.log(err);
+      alert("로그인에 실패했습니다. 다시 시도해주세요.");
+      //추후 모달창 개발 이후 모달창으로 변경
+    });
+}
 
 function Login() {
+  const route = useRouter();
   return (
     <div>
       <LoginBack />
@@ -31,9 +52,9 @@ function Login() {
           >
             <GoogleLogin
               onSuccess={(response: CredentialResponse) =>
-                console.log(response)
+                onLoginSuccess(response, route)
               }
-              onError={() => console.log("Error ")}
+              onError={() => alert("Error ")}
             />
           </GoogleOAuthProvider>
 
@@ -93,58 +114,3 @@ const StyledLoginWrapper = styled.div`
     gap: 0.625rem;
   }
 `;
-
-//  이전 배경 주석처리
-// const StyledBackground = styled.div`
-//   @-webkit-keyframes AnimationName {
-//     0% {
-//       background-position: 0% 50%;
-//     }
-//     50% {
-//       background-position: 100% 50%;
-//     }
-//     100% {
-//       background-position: 0% 50%;
-//     }
-//   }
-//   @-moz-keyframes AnimationName {
-//     0% {
-//       background-position: 0% 50%;
-//     }
-//     50% {
-//       background-position: 100% 50%;
-//     }
-//     100% {
-//       background-position: 0% 50%;
-//     }
-//   }
-//   @-o-keyframes AnimationName {
-//     0% {
-//       background-position: 0% 50%;
-//     }
-//     50% {
-//       background-position: 100% 50%;
-//     }
-//     100% {
-//       background-position: 0% 50%;
-//     }
-//   }
-//   @keyframes AnimationName {
-//     0% {
-//       background-position: 0% 0%;
-//     }
-//     50% {
-//       background-position: 100% 100%;
-//     }
-//     100% {
-//       background-position: 0% 0%;
-//     }
-//   }
-//   background: linear-gradient(-45deg, #ec977d, #eb5891, #23a6d5, #23d5ab);
-//   height: 100vh;
-//   background-size: 400% 400%;
-//   display: flex;
-//   animation: AnimationName 15s ease infinite;
-//   justify-content: center;
-//   align-items: center;
-// `;
