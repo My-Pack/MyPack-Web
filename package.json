@@ -27,6 +27,7 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "18.2.0",
+    "react-lottie": "^1.2.3",
     "recoil": "^0.7.7",
     "styled-components": "^5.3.9",
     "three": "^0.150.1",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@types/react-lottie": "^1.2.6",
     "@types/styled-components": "^5.1.26",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0"
