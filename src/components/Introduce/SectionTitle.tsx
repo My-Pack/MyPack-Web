@@ -24,6 +24,8 @@ const StyledWrapper = styled.div`
   width: 100%;
   gap: 2.5rem;
   line-height: 1rem;
+  margin: 3rem 3rem;
+  margin-top: 10rem;
 `;
 
 const StyledTitle = styled.span`
