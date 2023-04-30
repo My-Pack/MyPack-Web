@@ -5,6 +5,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import styled from "styled-components";
+import CardEffectItem from "../Card/CardEffectItem";
 
 function CardList() {
   return (
@@ -12,40 +13,33 @@ function CardList() {
       <StyledSwiper
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={20}
+        spaceBetween={50}
         //간격
-        slidesPerView={5}
+        slidesPerView={3}
         //보여질 컨텐츠 수
         centeredSlides={true}
         slideToClickedSlide={true}
         allowTouchMove={false}
         allowSlideNext={true}
         allowSlidePrev={true}
-        // 화살표 유무
-        //페이지네이션 표시 유무
-        // scrollbar={{ draggable: false }}
-        //드래그
       >
         <StyledSwiperSlide>
-          <StyledCardEx />
+          <CardEffectItem />
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <StyledCardEx />
+          <CardEffectItem />
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <StyledCardEx />
+          <CardEffectItem />
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <StyledCardEx />
+          <CardEffectItem />
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <StyledCardEx />
+          <CardEffectItem />
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <StyledCardEx />
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <StyledCardEx />
+          <CardEffectItem />
         </StyledSwiperSlide>
       </StyledSwiper>
     </StyeldCardList>
@@ -62,30 +56,22 @@ export default CardList;
 
 const StyeldCardList = styled.div`
   position: relative;
-  padding: 50px 0 100px;
+  padding: 3.125rem 0 6.25rem;
   height: 100vh;
   width: 100vw;
 `;
 
-const StyledCardEx = styled.div`
-  width: 200px;
-  background-color: gray;
-  border: 3px solid white;
-  cursor: pointer;
-  height: 400px;
-`;
-
 const StyledSwiper = styled(Swiper)`
   width: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 3.125rem;
+  padding-bottom: 3.125rem;
   overflow: hidden;
 `;
 const StyledSwiperSlide = styled(SwiperSlide)`
   background-position: center;
   background-size: cover;
-  width: 500px;
-  height: 600px;
+  width: fit-content;
+  height: 37.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,6 +79,6 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   &.swiper-slide-active {
     opacity: 1;
     z-index: 1;
-    transform: scale(1.5);
+    transform: scale(1.3);
   }
 `;
