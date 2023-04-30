@@ -67,6 +67,7 @@ const StyledLottie = styled.div`
 const StyledKeywordContent = styled(m.span)`
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   font-size: 3.3rem;
+  width: auto;
 `;
 
 const StyledSecondContent = styled(m.span)`
@@ -75,4 +76,5 @@ const StyledSecondContent = styled(m.span)`
   align-items: center;
   justify-content: flex-end;
   font-size: 1.5rem;
+  width: auto;
 `;

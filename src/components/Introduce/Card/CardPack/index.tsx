@@ -19,11 +19,13 @@ export default CardPack;
 const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+
   height: 43rem;
 `;
 
 const StyledLottie = styled.div`
-  z-index: -1;
-  width: 10%;
+z-index: -1;
+  width: 40rem;
+  margin-bottom: 4rem;
 `;

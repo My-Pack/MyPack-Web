@@ -42,6 +42,7 @@ const StyledTitleWrapper = styled.div`
   height: min-content;
 
   padding: 2.5rem;
+  padding-bottom: 1.5rem;
   margin-bottom: 0.5rem;
 `;
 
