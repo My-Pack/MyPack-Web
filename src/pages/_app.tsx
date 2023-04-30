@@ -1,13 +1,14 @@
+import { domMax, LazyMotion } from "framer-motion";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { RecoilRoot } from "recoil";
 import DeviceWarning from "src/components/DeviceWarning";
 import useMediaQuery from "src/hooks/useMediaQuery";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "styles/GlobalStyle";
 import theme from "styles/Theme/theme";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App({ Component, pageProps }: AppProps) {
   const isMobile = useMediaQuery(769);
@@ -20,11 +21,13 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <RecoilRoot>
         <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          {isMobile ? <DeviceWarning /> : ""}
-          <DndProvider backend={HTML5Backend}>
-            <Component {...pageProps} />
-          </DndProvider>
+          <LazyMotion features={domMax}>
+            <GlobalStyle />
+            {isMobile ? <DeviceWarning /> : ""}
+            <DndProvider backend={HTML5Backend}>
+              <Component {...pageProps} />
+            </DndProvider>
+          </LazyMotion>
         </ThemeProvider>
       </RecoilRoot>
     </>
