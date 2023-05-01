@@ -4,6 +4,7 @@ const color = {
   white: "#ffffff",
   black: "#000000",
   background: "#202124",
+  buttonHoverBlack: "#3a3939",
   grey: "#353535",
   grey100: "#808080",
   grey500: "#6e6e6e",
