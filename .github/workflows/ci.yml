@@ -1,12 +1,6 @@
 name: CI
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   run-lint:
@@ -23,5 +17,5 @@ jobs:
 
       - name: Check lint
         run: yarn lint
-      
+
       - run: echo "화이팅 ${{github.actor}}!"
