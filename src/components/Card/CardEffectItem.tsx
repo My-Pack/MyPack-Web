@@ -4,19 +4,18 @@ import {
   motion,
   useMotionTemplate,
   useMotionValue,
-  useTransform
+  useTransform,
 } from "framer-motion";
 import { RefObject, useEffect, useRef } from "react";
-
 import CardItem from "src/components/Card/CardItem";
 import styled from "styled-components";
 
-interface IProps{
-  drag: boolean;
-  dragEffect: false | Partial<BoundingBox> | RefObject<Element> | undefined;
+interface IProps {
+  drag?: boolean;
+  dragEffect?: false | Partial<BoundingBox> | RefObject<Element> | undefined;
 }
 
-function CardEffectItem({drag, dragEffect}: IProps) {
+function CardEffectItem({ drag, dragEffect }: IProps) {
   // 카드 요소
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -96,7 +95,12 @@ function CardEffectItem({drag, dragEffect}: IProps) {
 
   return (
     <StyledWrapper>
-      <StyledCardWrapper style={{ rotateX, rotateY }} drag={drag} dragConstraints={dragEffect} dragSnapToOrigin={true} >
+      <StyledCardWrapper
+        style={{ rotateX, rotateY }}
+        drag={drag}
+        dragConstraints={dragEffect}
+        dragSnapToOrigin={true}
+      >
         <StyledCardEffect
           ref={cardRef}
           style={{ backgroundImage: lightGradient }}
