@@ -4,10 +4,9 @@ import styled from "styled-components";
 interface IImageUploadProps {
   saveFileImage?: (event: ChangeEvent<HTMLInputElement>) => void;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  required?: boolean;
 }
 
-function FormImage({ saveFileImage, onChange, required }: IImageUploadProps) {
+function FormImage({ saveFileImage, onChange }: IImageUploadProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   return (
@@ -15,11 +14,10 @@ function FormImage({ saveFileImage, onChange, required }: IImageUploadProps) {
       type="file"
       accept="image/png, image/jpeg, image/jpg"
       ref={inputRef}
-      multiple
       onChange={(e) => {
         saveFileImage?.(e), onChange?.(e);
       }}
-      required={required}
+      required
     />
   );
 }
