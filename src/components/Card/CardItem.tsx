@@ -1,10 +1,8 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
-import useGetImage from "src/hooks/api/useGetImageById";
 import styled from "styled-components";
 
 interface Props {
-  img?: string;
+  img: string;
 }
 
 function CardItem({ img }: Props) {
@@ -12,17 +10,12 @@ function CardItem({ img }: Props) {
     <StyledCard>
       <StyledItemWrapper>
         <StyledTitleWrapper>제목</StyledTitleWrapper>
-
-        {img && (
-          <StyledImageWrapper>
-            {" "}
-            <StyledImage>
-              <Image src={img} alt="card_img" layout="fill" objectFit="cover" />
-            </StyledImage>
-          </StyledImageWrapper>
-        )}
-
-        <StyledSummaryWrapper>ㅁㄹㅇㅁㄴㄹㄴㄹㄹㅁㄴㅇㄹF</StyledSummaryWrapper>
+        <StyledImageWrapper>
+          <StyledImage>
+            <Image src={img} alt="card_img" layout="fill" objectFit="cover" />
+          </StyledImage>
+        </StyledImageWrapper>
+        <StyledSummaryWrapper>내용</StyledSummaryWrapper>
       </StyledItemWrapper>
       <StyledBottom>@2023 MyPack</StyledBottom>
     </StyledCard>
@@ -67,7 +60,6 @@ const StyledImageWrapper = styled.div`
 
 const StyledImage = styled.div`
   object-fit: cover;
-
   border: 3px solid rgb(229, 229, 229);
   margin: 0.3rem 0;
 `;
