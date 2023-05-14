@@ -12,7 +12,10 @@ import theme from "styles/Theme/theme";
 
 function App({ Component, pageProps }: AppProps) {
   const isMobile = useMediaQuery(769);
-
+  if (process.env.NODE_ENV === "development") {
+    const MockServer = () => import("src/mocks/worker");
+    MockServer();
+  }
   return (
     <>
       <Head>
