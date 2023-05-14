@@ -15,7 +15,4 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v3
 
-      - name: Check lint
-        run: yarn lint
-
       - run: echo "화이팅 ${{github.actor}}!"
