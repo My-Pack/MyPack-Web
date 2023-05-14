@@ -6,9 +6,12 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { RecoilRoot } from "recoil";
 import DeviceWarning from "src/components/DeviceWarning";
 import useMediaQuery from "src/hooks/useMediaQuery";
+import myPackGradient from "src/utils/gradient";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "styles/GlobalStyle";
 import theme from "styles/Theme/theme";
+
+myPackGradient();
 
 function App({ Component, pageProps }: AppProps) {
   const isMobile = useMediaQuery(769);
