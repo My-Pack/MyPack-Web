@@ -5,23 +5,23 @@ import styled from "styled-components";
 
 function Page404() {
   return (
-    <Page404Wrapper>
-      <Styled404Wrapper>
+    <StyledPage404Wrapper>
+      <StyledWrapper>
         <LottieWrapper lottieData={lottieData} />
-      </Styled404Wrapper>
+      </StyledWrapper>
       <h2>페이지를 찾을 수 없습니다</h2>
       <p>올바른 경로로 다시 접속해주세요.</p>
-    </Page404Wrapper>
+    </StyledPage404Wrapper>
   );
 }
 
 export default Page404;
 
-const Styled404Wrapper = styled.div`
+const StyledWrapper = styled.div`
   width: 25rem;
 `;
 
-const Page404Wrapper = styled.div`
+const StyledPage404Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;

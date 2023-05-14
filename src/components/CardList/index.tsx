@@ -24,9 +24,6 @@ function CardList() {
         allowSlidePrev={true}
       >
         <StyledSwiperSlide>
-          {/* <CardEffectItem />
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
           <CardEffectItem />
         </StyledSwiperSlide>
         <StyledSwiperSlide>
@@ -39,7 +36,10 @@ function CardList() {
           <CardEffectItem />
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <CardEffectItem /> */}
+          <CardEffectItem />
+        </StyledSwiperSlide>
+        <StyledSwiperSlide>
+          <CardEffectItem />
         </StyledSwiperSlide>
       </StyledSwiper>
     </StyeldCardList>
