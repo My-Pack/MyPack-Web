@@ -4,6 +4,13 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: process.env.NEXT_PUBLIC_IMAGE_URL,
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
