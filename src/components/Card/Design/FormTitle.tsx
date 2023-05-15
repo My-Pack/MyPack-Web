@@ -1,21 +1,34 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
+import Title from "src/components/Form/Title";
+import styled from "styled-components";
+import { InputWrapper } from "styles/css/formInput";
 
 interface IProps {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (event: MouseEvent<HTMLInputElement>) => void;
 }
 
-function FormTitle({ onChange }: IProps) {
+function FormTitle({ onChange, onClick }: IProps) {
   return (
-    <div>
-      <input
+    <>
+      <Title title="제목" subTitle="카드를 제목을 지어주세요" essential />
+      <StyledInput
         type="text"
+        onClick={(e) => {
+          onClick?.(e);
+        }}
         onChange={(e) => {
           onChange?.(e);
         }}
         required
+        placeholder="Enter Title"
       />
-    </div>
+    </>
   );
 }
 
 export default FormTitle;
+
+const StyledInput = styled(InputWrapper)`
+  margin-bottom: 2.3rem;
+`;
