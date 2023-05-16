@@ -1,19 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function useGetImage() {
+function useGetCard() {
   const [card, setCard] = useState<IGetCardData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  async function getCardById() {
+  async function getCard() {
     setIsLoading(true);
-    const response = await axios.get(`http://localhost:3000/design`);
+    const response = await axios.get<{}, IGetCard>(
+      `http://localhost:3000/design`,
+    );
+    console.log(response.data);
     setCard(response.data);
     setIsLoading(false);
   }
 
   useEffect(() => {
-    getCardById();
+    getCard();
   }, []);
 
   return {
@@ -22,4 +25,4 @@ function useGetImage() {
   };
 }
 
-export default useGetImage;
+export default useGetCard;

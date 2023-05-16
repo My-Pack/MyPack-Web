@@ -1,18 +1,18 @@
-interface IGetRestaurant {
-  status: number;
-  data: IGetCard;
-}
-
 interface IGetCard {
-  content: IGetCardData[];
+  status: number;
+  data: IGetCardData;
 }
 
 interface IGetCardData {
+  content: IGetCardDataContent[];
+}
+
+interface IGetCardDataContent {
   id: number;
   title: string;
   content: string;
   cardImage: IImage;
-  thene: ITheme;
+  theme: ITheme;
   memberId: string;
   createdAt: string;
   modifiedAt: string;
