@@ -2,22 +2,22 @@ import Image from "next/image";
 import styled from "styled-components";
 
 interface Props {
-  img?: string;
+  title: string;
+  content: string;
+  img: string;
 }
 
-function CardItem({ img }: Props) {
+function CardItem({ title, content, img }: Props) {
   return (
     <StyledCard>
       <StyledItemWrapper>
-        <StyledTitleWrapper>제목</StyledTitleWrapper>
+        <StyledTitleWrapper>{title}</StyledTitleWrapper>
         <StyledImageWrapper>
           <StyledImage>
-            {img && (
-              <Image src={img} alt="card_img" layout="fill" objectFit="cover" />
-            )}
+            <Image src={img} alt="card_img" layout="fill" objectFit="cover" />
           </StyledImage>
         </StyledImageWrapper>
-        <StyledSummaryWrapper>내용</StyledSummaryWrapper>
+        <StyledSummaryWrapper>{content}</StyledSummaryWrapper>
       </StyledItemWrapper>
       <StyledBottom>@2023 MyPack</StyledBottom>
     </StyledCard>
