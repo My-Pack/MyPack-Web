@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import Hamburger from "src/components/Nav/Hamburger";
 import Info from "src/components/Profile/Info";
 import ProfileCardList from "src/components/Profile/CardList/ProfileCardList";
 
+export interface IQuantity {
+  card: number;
+  cardPack: number;
+  follower: number;
+  follow: number;
+}
+interface IInfo {
+  name: string;
+  profileImage: string;
+  backgroundImage: string;
+  quantity: IQuantity;
+}
+interface IProfile extends IInfo {}
+
 function Profile() {
+  const [profile, setProfile] = useState<IProfile | null>();
+  useEffect(() => {
+    const getProfile = async () => {
+      await axios
+        .post("http://localhost:3000/myprofile", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setProfile(res.data);
+        })
+        .catch((err) => console.log(err));
+    };
+    setTimeout(() => {
+      getProfile();
+    }, 2000); // 목업서버르 위해 2초 지연
+  }, []);
+
   return (
     <StyledProfile>
       <StyledWrapper>
         <div className="hamberger">
           <Hamburger />
         </div>
-        <Info />
+        <Info
+          name={profile?.name as string}
+          quantity={profile?.quantity as IQuantity}
+        />
         <ProfileCardList />
       </StyledWrapper>
     </StyledProfile>

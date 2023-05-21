@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import { IQuantity } from "src/pages/profile/index";
 
-function Info() {
-  return (
+function Info({ name, quantity }: { name: string; quantity: IQuantity }) {
+  return name ? (
     <StyledInfo>
       <div className="profilePhoto"></div>
       <div className="infos">
         <div className="nameAndProfileset">
-          <div className="name">hong_gildong_</div>
+          <div className="name">{name}</div>
           <div className="profileset">
             <SettingsRoundedIcon />
             프로필 설정
@@ -16,20 +17,22 @@ function Info() {
         </div>
         <div className="quantity">
           <div>
-            카드 <span>0</span>
+            카드 <span>{quantity.card}</span>
           </div>
           <div>
-            카드팩 <span>0</span>
+            카드팩 <span>{quantity.card}</span>
           </div>
           <div>
-            팔로워 <span>0</span>
+            팔로워 <span>{quantity.card}</span>
           </div>
           <div>
-            팔로우 <span>0</span>
+            팔로우 <span>{quantity.card}</span>
           </div>
         </div>
       </div>
     </StyledInfo>
+  ) : (
+    <div>로딩중</div>
   );
 }
 

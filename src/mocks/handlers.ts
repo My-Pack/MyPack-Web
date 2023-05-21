@@ -18,7 +18,23 @@ export const handlers = [
       }),
     );
   }),
-  rest.post("http://lcoalhost:3000/user", async (req, res, ctx) => {
+  rest.post("http://localhost:3000/user", async (req, res, ctx) => {
     return res();
+  }),
+  rest.post("http://localhost:3000/myprofile", async (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        name: "jae_gwan_",
+        profileImage: "https://avatars.githubusercontent.com/u/50162076?v=4",
+        backgroundImage: "https://avatars.githubusercontent.com/u/50162076?v=4",
+        quantity: {
+          card: 1,
+          cardPack: 1,
+          follower: 1,
+          follow: 1,
+        },
+      }),
+    );
   }),
 ];
