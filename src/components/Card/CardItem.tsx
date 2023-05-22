@@ -2,9 +2,9 @@ import Image from "next/image";
 import styled from "styled-components";
 
 interface Props {
-  title: string;
-  content: string;
-  img: string;
+  title?: string;
+  content?: string;
+  img?: string;
 }
 
 function CardItem({ title, content, img }: Props) {
@@ -14,7 +14,9 @@ function CardItem({ title, content, img }: Props) {
         <StyledTitleWrapper>{title}</StyledTitleWrapper>
         <StyledImageWrapper>
           <StyledImage>
-            <Image src={img} alt="card_img" layout="fill" objectFit="cover" />
+            {img && (
+              <Image src={img} alt="card_img" layout="fill" objectFit="cover" />
+            )}
           </StyledImage>
         </StyledImageWrapper>
         <StyledSummaryWrapper>{content}</StyledSummaryWrapper>
