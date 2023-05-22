@@ -17,7 +17,6 @@ function PreviewCard({ active, title, content, img, color }: IProps) {
         <StyledTitleWrapper>{title}</StyledTitleWrapper>
         <StyledContentWrapper>{content}</StyledContentWrapper>
       </StyledCardItemBackWrapper>
-
       <StyledCardItemWrapper color={color}>
         <StyledImageWrapper>
           <StyledImage>
@@ -49,24 +48,24 @@ const StyledFrame = styled.div<{ color: string }>`
 const StyledCardItemWrapper = styled.div<{ color: string }>`
   position: absolute;
   background-color: rgb(207, 205, 205);
-  padding: 2rem;
+
   backface-visibility: hidden;
   width: 100%;
   height: 100%;
 
   border-radius: 15px;
   overflow-wrap: break-word;
-  box-shadow: inset 0 0 60px whitesmoke,
-    inset 20px 0 80px ${({ color }) => color}, inset -20px 0 80px transparent,
-    inset 20px 0 300px ${({ color }) => color}, inset -20px 0 300px transparent,
-    0 0 50px transparent, -10px 0 80px ${({ color }) => color},
-    10px 0 80px transparent;
+  box-shadow: inset 0 0 140px white, inset 10px 0 35px ${({ color }) => color},
+    inset -20px 0 80px transparent, inset 16px 0 120px ${({ color }) => color},
+    inset -20px 0 100px transparent, 0 0 40px transparent,
+    -10px 0 70px ${({ color }) => color}, 10px 0 80px transparent;
 `;
 
 const StyledCardItemBackWrapper = styled(StyledCardItemWrapper)<{
   color: string;
 }>`
   transform: rotateY(180deg);
+  padding: 2rem;
 `;
 
 const StyledCard = styled.div<{ active: boolean }>`
@@ -106,10 +105,11 @@ const StyledImage = styled.div`
 
 const StyledTitleWrapper = styled.div`
   height: auto;
-  opacity: 0.9;
-  font-size: 1.25rem;
+  opacity: 0.89;
+  font-size: 1.5rem;
   font-weight: ${({ theme }) => theme.fontWeight.semibold};
-  letter-spacing: 0.4px;
+  letter-spacing: 1px;
+  font-style: italic;
 `;
 
 const StyledContentWrapper = styled.div`
@@ -117,13 +117,10 @@ const StyledContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   font-weight: ${({ theme }) => theme.fontWeight.light};
-  font-size: 0.87rem;
-  letter-spacing: 0.2px;
-`;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  margin-top: 1rem;
+  opacity: 0.9;
 
-const StyledBottom = styled.div`
-  position: absolute;
-  bottom: 0px;
-  font-weight: ${({ theme }) => theme.fontWeight.light};
-  font-size: 2px;
+  overflow: auto;
 `;
