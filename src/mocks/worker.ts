@@ -11,4 +11,4 @@ if (isServer) {
     worker.start();
   })();
 }
-export { };
+export {};

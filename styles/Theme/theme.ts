@@ -11,6 +11,8 @@ const color = {
   borderBackground: "#2e2c2c",
   borderGrey: "#707070",
   glass: "rgba(0,0,0,0)", //투명
+  neonMint: "#0ff",
+  neonPink: "#f0f"
 };
 
 const fontWeight = {
