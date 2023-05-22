@@ -4,77 +4,69 @@ import styled from "styled-components";
 interface IProps {
   active: boolean;
   title: string;
-  summary: string;
-  previewImage: string;
+  content: string;
   color: string;
-  img?: string;
+  img: string;
 }
 
-function PreviewCard({
-  active,
-  title,
-  summary,
-  previewImage,
-  img,
-  color,
-}: IProps) {
+function PreviewCard({ active, title, content, img, color }: IProps) {
   return (
     <StyledCard active={active}>
-      <StyledFrame>
-        <Image src="/assets/images/frame.png" alt="a" layout="fill" />
-      </StyledFrame>
-      <StyledFrontItemWrapper>
+      <StyledFrame color={color}></StyledFrame>
+      <StyledCardItemBackWrapper color={color}>
+        <StyledTitleWrapper>{title}</StyledTitleWrapper>
+        <StyledContentWrapper>{content}</StyledContentWrapper>
+      </StyledCardItemBackWrapper>
+
+      <StyledCardItemWrapper color={color}>
         <StyledImageWrapper>
-          {previewImage && (
-            <StyledImage>
-              <Image
-                src={previewImage}
-                alt="card_img"
-                layout="fill"
-                objectFit="cover"
-              />
-            </StyledImage>
-          )}{" "}
+          <StyledImage>
+            {img && (
+              <Image src={img} alt="card_img" layout="fill" objectFit="cover" />
+            )}
+          </StyledImage>
         </StyledImageWrapper>
-      </StyledFrontItemWrapper>
-
-      <StyledBackCard color={color}>
-        <StyledFrontItemWrapper>
-          <StyledTitleWrapper>{title}</StyledTitleWrapper>
-          <StyledSummaryWrapper>{summary}</StyledSummaryWrapper>
-        </StyledFrontItemWrapper>
-      </StyledBackCard>
-
-      {/* <StyledBottom>@2023 MyPack</StyledBottom> */}
+      </StyledCardItemWrapper>
     </StyledCard>
   );
 }
 
 export default PreviewCard;
 
-const StyledFrame = styled.div`
+const StyledFrame = styled.div<{ color: string }>`
   position: absolute;
   width: 100%;
   height: 100%;
   z-index: 33;
+  border-radius: 15px;
+  border: ${({ color }) => {
+    if (color) {
+      return `1.2rem solid ${color}`;
+    }
+  }};
 `;
 
-const StyledBackCard = styled.div`
+const StyledCardItemWrapper = styled.div<{ color: string }>`
   position: absolute;
-  background-color: rgb(199, 199, 199);
+  background-color: rgb(207, 205, 205);
+  padding: 2rem;
   backface-visibility: hidden;
   width: 100%;
   height: 100%;
-  transform: rotateY(180deg);
+
+  border-radius: 15px;
+  overflow-wrap: break-word;
   box-shadow: inset 0 0 60px whitesmoke,
     inset 20px 0 80px ${({ color }) => color}, inset -20px 0 80px transparent,
     inset 20px 0 300px ${({ color }) => color}, inset -20px 0 300px transparent,
     0 0 50px transparent, -10px 0 80px ${({ color }) => color},
     10px 0 80px transparent;
+`;
 
-  /* box-shadow: inset 0 0 60px whitesmoke, inset 20px 0 80px #f0f,
-    inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
-    0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff; */
+const StyledCardItemBackWrapper = styled(StyledCardItemWrapper)<{
+  color: string;
+}>`
+  transform: rotateY(180deg);
 `;
 
 const StyledCard = styled.div<{ active: boolean }>`
@@ -82,6 +74,7 @@ const StyledCard = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   width: 24rem;
   height: 35rem;
 
@@ -90,26 +83,13 @@ const StyledCard = styled.div<{ active: boolean }>`
   color: black;
   font-weight: ${({ theme }) => theme.fontWeight.light};
 
-  position: relative;
   transition: 0.4s;
   transform-style: preserve-3d;
-
   transform: ${({ active }) => {
     if (active) {
       return "rotateY(180deg)";
     }
   }};
-`;
-
-const StyledFrontItemWrapper = styled.div`
-  position: absolute;
-  backface-visibility: hidden;
-  width: 100%;
-  height: 100%;
-  padding: 0.75rem;
-
-  border-radius: 15px;
-  overflow-wrap: break-word;
 `;
 
 const StyledImageWrapper = styled.div`
@@ -132,7 +112,7 @@ const StyledTitleWrapper = styled.div`
   letter-spacing: 0.4px;
 `;
 
-const StyledSummaryWrapper = styled.div`
+const StyledContentWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
