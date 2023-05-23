@@ -9,6 +9,9 @@ const nextConfig = {
       {
         hostname: process.env.NEXT_PUBLIC_IMAGE_URL,
       },
+      {
+        hostname: "avatars.githubusercontent.com", // Info 컴포넌트 테스트를 위해 추가
+      },
     ],
   },
 };

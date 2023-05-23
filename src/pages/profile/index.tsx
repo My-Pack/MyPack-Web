@@ -4,6 +4,11 @@ import styled from "styled-components";
 import Hamburger from "src/components/Nav/Hamburger";
 import Info from "src/components/Profile/Info";
 import ProfileCardList from "src/components/Profile/CardList/ProfileCardList";
+import Image from "next/image";
+
+// Todo: Info 배경 레이아웃 적용
+// Todo: Info 프로필 사진 적용
+// Todo: 게시글 사진 및 내용 링크 적용
 
 export interface IQuantity {
   card: number;
@@ -17,7 +22,28 @@ interface IInfo {
   backgroundImage: string;
   quantity: IQuantity;
 }
-interface IProfile extends IInfo {}
+interface IGetCardData {
+  content: IGetCardDataContent[];
+}
+
+export interface IGetCardDataContent {
+  id: number;
+  title: string;
+  content: string;
+  cardImage: IImage;
+  theme: ITheme;
+  memberId: string;
+  createdAt: string;
+  modifiedAt: string;
+}
+export interface IImage {
+  s3Url: string;
+}
+export interface ITheme {
+  img: string;
+  color: string;
+}
+interface IProfile extends IInfo, IGetCardData {}
 
 function Profile() {
   const [profile, setProfile] = useState<IProfile | null>();
@@ -29,6 +55,7 @@ function Profile() {
         })
         .then((res) => {
           setProfile(res.data);
+          console.log(res.data);
         })
         .catch((err) => console.log(err));
     };
@@ -39,28 +66,35 @@ function Profile() {
 
   return (
     <StyledProfile>
-      <StyledWrapper>
-        <div className="hamberger">
-          <Hamburger />
-        </div>
-        <Info
-          name={profile?.name as string}
-          quantity={profile?.quantity as IQuantity}
+      <div className="hamberger">
+        <Hamburger />
+      </div>
+      <StyledBackgroundImage>
+        <Image
+          src={profile?.backgroundImage as string}
+          fill
+          alt="backgroundImage"
         />
-        <ProfileCardList />
-      </StyledWrapper>
+      </StyledBackgroundImage>
+      <Info
+        profileImage={profile?.profileImage as string}
+        name={profile?.name as string}
+        quantity={profile?.quantity as IQuantity}
+      />
+      <ProfileCardList content={profile?.content as IGetCardDataContent[]} />
     </StyledProfile>
   );
 }
 
 export default Profile;
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: calc(53.875rem+3.125rem);
+const StyledBackgroundImage = styled.div`
+  position: fixed;
+  height: 18.75rem;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
 `;
+
 const StyledProfile = styled.div`
   .hamberger {
     position: fixed;
@@ -70,8 +104,8 @@ const StyledProfile = styled.div`
   }
   display: flex;
   justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
-  height: 100vh;
 `;

@@ -2,11 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import { IQuantity } from "src/pages/profile/index";
+import Image from "next/image";
 
-function Info({ name, quantity }: { name: string; quantity: IQuantity }) {
+function Info({
+  name,
+  quantity,
+  profileImage,
+}: {
+  name: string;
+  quantity: IQuantity;
+  profileImage: string;
+}) {
   return name ? (
     <StyledInfo>
-      <div className="profilePhoto"></div>
+      <div className="profilePhoto">
+        <StyledImage src={profileImage} alt="profileImage" fill />
+      </div>
       <div className="infos">
         <div className="nameAndProfileset">
           <div className="name">{name}</div>
@@ -36,9 +47,15 @@ function Info({ name, quantity }: { name: string; quantity: IQuantity }) {
   );
 }
 
+const StyledImage = styled(Image)`
+  object-fit: "cover";
+`;
+
 const StyledInfo = styled.div`
+  z-index: 2;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #202124 100%);
   width: 100%;
-  height: 40vh;
+  height: 18.75rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -49,7 +66,8 @@ const StyledInfo = styled.div`
     width: 10.875rem;
     height: 10.875rem;
     border-radius: 50%;
-    background-color: ${({ theme }) => theme.color.white};
+    position: relative;
+    overflow: hidden;
   }
   .infos {
     width: 43rem;
