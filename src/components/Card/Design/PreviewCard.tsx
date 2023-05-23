@@ -2,74 +2,106 @@ import Image from "next/image";
 import styled from "styled-components";
 
 interface IProps {
+  active: boolean;
   title: string;
-  summary: string;
-  previewImage: string;
+  content: string;
   color: string;
+  img: string;
 }
 
-function PreviewCard({ title, summary, previewImage, color }: IProps) {
+function PreviewCard({ active, title, content, img, color }: IProps) {
   return (
-    <StyledCard>
-      <StyledItemWrapper>
+    <StyledCard active={active}>
+      <StyledFrame color={color}></StyledFrame>
+      <StyledCardItemBackWrapper color={color}>
         <StyledTitleWrapper>{title}</StyledTitleWrapper>
-        <StyledImageWrapper>
-          {previewImage && (
-            <StyledImage>
-              <Image
-                src={previewImage}
-                alt="card_img"
-                layout="fill"
-                objectFit="cover"
-              />
-            </StyledImage>
-          )}{" "}
-        </StyledImageWrapper>
+        <StyledContentWrapper>{content}</StyledContentWrapper>
+      </StyledCardItemBackWrapper>
 
-        <StyledSummaryWrapper>{summary}</StyledSummaryWrapper>
-      </StyledItemWrapper>
-      <StyledBottom>@2023 MyPack</StyledBottom>
+      <StyledCardItemWrapper color={color}>
+        <StyledImageWrapper>
+          <StyledImage>
+            {img && (
+              <Image src={img} alt="card_img" layout="fill" objectFit="cover" />
+            )}
+          </StyledImage>
+        </StyledImageWrapper>
+      </StyledCardItemWrapper>
     </StyledCard>
   );
 }
 
 export default PreviewCard;
 
-const StyledCard = styled.div`
+const StyledFrame = styled.div<{ color: string }>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 33;
+  border-radius: 15px;
+  border: ${({ color }) => {
+    if (color) {
+      return `1.2rem solid ${color}`;
+    }
+  }};
+`;
+
+const StyledCardItemWrapper = styled.div<{ color: string }>`
+  position: absolute;
+  background-color: rgb(207, 205, 205);
+  padding: 2rem;
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 15px;
+  overflow-wrap: break-word;
+  box-shadow: inset 0 0 60px whitesmoke,
+    inset 20px 0 80px ${({ color }) => color}, inset -20px 0 80px transparent,
+    inset 20px 0 300px ${({ color }) => color}, inset -20px 0 300px transparent,
+    0 0 50px transparent, -10px 0 80px ${({ color }) => color},
+    10px 0 80px transparent;
+`;
+
+const StyledCardItemBackWrapper = styled(StyledCardItemWrapper)<{
+  color: string;
+}>`
+  transform: rotateY(180deg);
+`;
+
+const StyledCard = styled.div<{ active: boolean }>`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 23rem;
-  height: 29.7rem;
-  border-radius: 15px;
-  background-color: ${({ color }) => color};
-  color: black;
-  padding: 0.9rem;
-  font-weight: ${({ theme }) => theme.fontWeight.light};
-`;
 
-const StyledItemWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 0.75rem;
-  background-color: rgb(199, 199, 199);
+  width: 24rem;
+  height: 35rem;
+
   border-radius: 15px;
-  overflow-wrap: break-word;
-  box-shadow: inset 0 0 60px whitesmoke, inset 20px 0 80px #f0f,
-    inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
-    0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+
+  color: black;
+  font-weight: ${({ theme }) => theme.fontWeight.light};
+
+  transition: 0.4s;
+  transform-style: preserve-3d;
+  transform: ${({ active }) => {
+    if (active) {
+      return "rotateY(180deg)";
+    }
+  }};
 `;
 
 const StyledImageWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 11rem;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
 `;
 
 const StyledImage = styled.div`
   object-fit: cover;
-  margin: 0.5rem 0;
 `;
 
 const StyledTitleWrapper = styled.div`
@@ -80,7 +112,7 @@ const StyledTitleWrapper = styled.div`
   letter-spacing: 0.4px;
 `;
 
-const StyledSummaryWrapper = styled.div`
+const StyledContentWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
