@@ -1,6 +1,5 @@
 import { useState } from "react";
-import CardItem from "src/components/Card/CardItem";
-import PreviewCard from "src/components/Card/Design/PreviewCard";
+import Card from "src/components/Card";
 import Nav from "src/components/Nav";
 import useGetCard from "src/hooks/api/useGetCard";
 import styled from "styled-components";
@@ -23,26 +22,42 @@ function Home() {
     <>
       <Nav />
       <StyledWrapper>
-        {card?.content.map((data) => {
+        <Card
+          title="한강간 날"
+          content="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum"
+          date="2023.06.03"
+          color="pink"
+          img="https://github.com/My-Pack/MyPack-Web/assets/63100352/958a401b-6560-4ef5-aae3-0c234eab44c2"
+        />
+        <Card
+          title="부제목있는 버전"
+          content="귀여운 강아지 설이"
+          subTitle="설이랑 🐶"
+          date="2023.06.03"
+          color="yellow"
+          img="https://github.com/My-Pack/MyPack-Web/assets/63100352/538008df-56bc-44cf-8ff6-e2756f770562"
+        />
+
+        <Card
+          title="해커톤"
+          content="재밌었던 해커톤"
+          date="2023.06.03"
+          color="white"
+          img="https://github.com/My-Pack/MyPack-Web/assets/63100352/c130d416-c5b9-4a78-990e-87be9c11eeb4"
+        />
+        {/* {card?.content.map((data) => {
           return (
-            <CardItem
-              title={data.title}
-              content={data.content}
-              img={data.cardImage.s3Url}
-            />
+            <div onClick={onClick}>
+              <PreviewCard
+                title={data.title}
+                active={active}
+                color={data.theme.color}
+                content={data.content}
+                img={data.cardImage.s3Url}
+              />
+            </div>
           );
-        })}
-        {card?.content.map((data) => {
-          return (
-            <PreviewCard
-              title={data.title}
-              active={true}
-              color={data.theme.color}
-              content={data.content}
-              img={data.cardImage.s3Url}
-            />
-          );
-        })}
+        })} */}
       </StyledWrapper>
     </>
   );
@@ -56,6 +71,8 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  gap: 4rem;
+  padding: 1rem 3rem;
 `;
 
 const StyledItemWrapper = styled.div`
