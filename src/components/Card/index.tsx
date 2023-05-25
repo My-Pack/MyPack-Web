@@ -1,17 +1,26 @@
 import Image from "next/image";
+import { useState } from "react";
 import styled from "styled-components";
 
 interface IProps {
-  active: boolean;
   title: string;
+  subTitle?: string;
   content: string;
+  date: string;
   color: string;
   img: string;
 }
 
-function PreviewCard({ active, title, content, img, color }: IProps) {
+//TODO 글자수 제한
+function Card({ title, subTitle, content, date, img, color }: IProps) {
+  const [click, setClick] = useState(false);
+
+  function onClick() {
+    setClick(!click);
+  }
+
   return (
-    <StyledCard active={active}>
+    <StyledCard onClick={onClick} active={click}>
       <StyledFrame color={color}></StyledFrame>
       <StyledCardItemBackWrapper color={color}>
         <StyledTitleWrapper>{title}</StyledTitleWrapper>
@@ -20,17 +29,20 @@ function PreviewCard({ active, title, content, img, color }: IProps) {
       <StyledCardItemWrapper color={color}>
         <StyledImageWrapper>
           <StyledImage>
-            {img && (
-              <Image src={img} alt="card_img" layout="fill" objectFit="cover" />
-            )}
+            {img && <Image src={img} alt="card_img" fill objectFit="cover" />}
           </StyledImage>
+          <StyledHover>
+            <span> {title}</span>
+            <p>{date}</p>
+            {subTitle && <p>{subTitle}</p>}
+          </StyledHover>
         </StyledImageWrapper>
       </StyledCardItemWrapper>
     </StyledCard>
   );
 }
 
-export default PreviewCard;
+export default Card;
 
 const StyledFrame = styled.div<{ color: string }>`
   position: absolute;
@@ -47,18 +59,14 @@ const StyledFrame = styled.div<{ color: string }>`
 
 const StyledCardItemWrapper = styled.div<{ color: string }>`
   position: absolute;
-  background-color: rgb(207, 205, 205);
-
   backface-visibility: hidden;
   width: 100%;
   height: 100%;
-
+  background-color: rgb(207, 205, 205);
   border-radius: 15px;
   overflow-wrap: break-word;
-  box-shadow: inset 0 0 140px white, inset 10px 0 35px ${({ color }) => color},
-    inset -20px 0 80px transparent, inset 16px 0 120px ${({ color }) => color},
-    inset -20px 0 100px transparent, 0 0 40px transparent,
-    -10px 0 70px ${({ color }) => color}, 10px 0 80px transparent;
+  box-shadow: ${({ color }) => color} 10px 0px 50px -20px,
+    ${({ color }) => color} -10px 30px 60px -30px;
 `;
 
 const StyledCardItemBackWrapper = styled(StyledCardItemWrapper)<{
@@ -66,6 +74,9 @@ const StyledCardItemBackWrapper = styled(StyledCardItemWrapper)<{
 }>`
   transform: rotateY(180deg);
   padding: 2rem;
+
+  background-color: rgb(220, 220, 220);
+  box-shadow: inset 10px 2px 80px 20px ${({ color }) => color};
 `;
 
 const StyledCard = styled.div<{ active: boolean }>`
@@ -74,11 +85,10 @@ const StyledCard = styled.div<{ active: boolean }>`
   flex-direction: column;
   align-items: center;
 
-  width: 24rem;
-  height: 35rem;
+  width: 20rem;
+  height: 31rem;
 
   border-radius: 15px;
-
   color: black;
   font-weight: ${({ theme }) => theme.fontWeight.light};
 
@@ -123,4 +133,34 @@ const StyledContentWrapper = styled.div`
   opacity: 0.9;
 
   overflow: auto;
+`;
+
+const StyledHover = styled.div`
+  position: absolute;
+  opacity: 0;
+  bottom: 0px;
+
+  width: 100%;
+  padding: 2rem 3rem;
+  min-height: 12rem;
+
+  color: ${({ theme }) => theme.color.white};
+  transform: translateY(5rem);
+  transition: all 0.9s;
+
+  ${StyledCard}:hover & {
+    opacity: 1;
+    transform: none;
+  }
+
+  span {
+    font-weight: ${({ theme }) => theme.fontWeight.semibold};
+    font-size: 1.75rem;
+  }
+
+  p {
+    font-weight: ${({ theme }) => theme.fontWeight.light};
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
 `;
