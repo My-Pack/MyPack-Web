@@ -50,7 +50,7 @@ function Profile() {
   useEffect(() => {
     const getProfile = async () => {
       await axios
-        .post("http://localhost:3000/myprofile", {
+        .get("http://localhost:3000/myprofile", {
           withCredentials: true,
         })
         .then((res) => {

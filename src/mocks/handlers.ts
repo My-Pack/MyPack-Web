@@ -38,7 +38,7 @@ export const handlers = [
   rest.post("http://localhost:3000/user", async (req, res, ctx) => {
     return res();
   }),
-  rest.post("http://localhost:3000/myprofile", async (req, res, ctx) => {
+  rest.get("http://localhost:3000/myprofile", async (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
