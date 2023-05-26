@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
-import { IQuantity } from "src/pages/profile/index";
 import Image from "next/image";
 
 function Info({
@@ -13,7 +12,7 @@ function Info({
   quantity: IQuantity;
   profileImage: string;
 }) {
-  return name ? (
+  return (
     <StyledInfo>
       <div className="profilePhoto">
         <StyledImage src={profileImage} alt="profileImage" fill />
@@ -42,8 +41,6 @@ function Info({
         </div>
       </div>
     </StyledInfo>
-  ) : (
-    <div>로딩중</div>
   );
 }
 

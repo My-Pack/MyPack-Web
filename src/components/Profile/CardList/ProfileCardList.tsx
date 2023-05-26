@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Card from "src/components/Profile/CardList/Card";
-import { IGetCardDataContent, IImage, ITheme } from "src/pages/profile/index";
 
 function ProfileCardList({ content }: { content: IGetCardDataContent[] }) {
-  return content ? (
+  return (
     <StyledCardListWrapper>
       <StyledCardList>
         {content.map((card) => (
@@ -12,7 +11,7 @@ function ProfileCardList({ content }: { content: IGetCardDataContent[] }) {
         ))}
       </StyledCardList>
     </StyledCardListWrapper>
-  ) : null;
+  );
 }
 
 export default ProfileCardList;

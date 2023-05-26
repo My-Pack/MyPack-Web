@@ -5,44 +5,12 @@ import Hamburger from "src/components/Nav/Hamburger";
 import Info from "src/components/Profile/Info";
 import ProfileCardList from "src/components/Profile/CardList/ProfileCardList";
 import Image from "next/image";
+import Loading from "src/components/Loading";
 
 // Todo: Info 배경 레이아웃 적용
 // Todo: Info 프로필 사진 적용
 // Todo: 게시글 사진 및 내용 링크 적용
 
-export interface IQuantity {
-  card: number;
-  cardPack: number;
-  follower: number;
-  follow: number;
-}
-interface IInfo {
-  name: string;
-  profileImage: string;
-  backgroundImage: string;
-  quantity: IQuantity;
-}
-interface IGetCardData {
-  content: IGetCardDataContent[];
-}
-
-export interface IGetCardDataContent {
-  id: number;
-  title: string;
-  content: string;
-  cardImage: IImage;
-  theme: ITheme;
-  memberId: string;
-  createdAt: string;
-  modifiedAt: string;
-}
-export interface IImage {
-  s3Url: string;
-}
-export interface ITheme {
-  img: string;
-  color: string;
-}
 interface IProfile extends IInfo, IGetCardData {}
 
 function Profile() {
@@ -64,7 +32,7 @@ function Profile() {
     }, 2000); // 목업서버르 위해 2초 지연
   }, []);
 
-  return (
+  return profile ? (
     <StyledProfile>
       <div className="hamberger">
         <Hamburger />
@@ -83,6 +51,8 @@ function Profile() {
       />
       <ProfileCardList content={profile?.content as IGetCardDataContent[]} />
     </StyledProfile>
+  ) : (
+    <Loading />
   );
 }
 
