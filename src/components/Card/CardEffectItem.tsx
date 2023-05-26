@@ -7,15 +7,36 @@ import {
   useTransform,
 } from "framer-motion";
 import { RefObject, useEffect, useRef } from "react";
+import Card from "src/components/Card";
 import CardItem from "src/components/Card/CardItem";
 import styled from "styled-components";
 
 interface IProps {
   drag?: boolean;
   dragEffect?: false | Partial<BoundingBox> | RefObject<Element> | undefined;
+
+  title?: string;
+  subTitle?: string;
+  content?: string;
+  date?: string;
+  color?: string;
+  img?: string;
+  width?: string;
+  height?: string;
 }
 
-function CardEffectItem({ drag, dragEffect }: IProps) {
+function CardEffectItem({
+  drag,
+  dragEffect,
+  title,
+  subTitle,
+  content,
+  date,
+  img,
+  color,
+  width,
+  height,
+}: IProps) {
   // 카드 요소
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -105,7 +126,20 @@ function CardEffectItem({ drag, dragEffect }: IProps) {
           ref={cardRef}
           style={{ backgroundImage: lightGradient }}
         >
-          <CardItem />
+          {title && content && date && img && color && width && height ? (
+            <Card
+              title={title}
+              subTitle={subTitle}
+              content={content}
+              date={date}
+              img={img}
+              color={color}
+              width={width}
+              height={height}
+            />
+          ) : (
+            <CardItem />
+          )}
         </StyledCardEffect>
       </StyledCardWrapper>
     </StyledWrapper>
