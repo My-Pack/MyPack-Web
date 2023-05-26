@@ -5,6 +5,7 @@ import FormBgcolor from "src/components/Card/Design/FormBgcolor";
 import FormImage from "src/components/Card/Design/FormImage";
 import FormSummary from "src/components/Card/Design/FormSummary";
 import FormTitle from "src/components/Card/Design/FormTitle";
+import HowTo from "src/components/Card/Design/HowTo";
 import PreviewCard from "src/components/Card/Design/PreviewCard";
 import Title from "src/components/Form/Title";
 import Nav from "src/components/Nav";
@@ -16,6 +17,9 @@ function DesignCard() {
   const [theme, setTheme] = useState<string>("");
   const [file, setFile] = useState<File>();
   const [isClick, setIsClick] = useState<boolean>(false);
+
+  // howto
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -66,9 +70,15 @@ function DesignCard() {
     }
   };
 
+  const onClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
+      {isOpen ? <HowTo onClick={onClick} /> : null}
       <Nav />
+      <button onClick={onClick}>눌러봐</button>
       <StyledWrapper>
         <StyledCardWrapper>
           <PreviewCard
