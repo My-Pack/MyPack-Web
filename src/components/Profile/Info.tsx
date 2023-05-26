@@ -48,7 +48,7 @@ function Info({
 }
 
 const StyledImage = styled(Image)`
-  object-fit: "cover";
+  object-fit: cover;
 `;
 
 const StyledInfo = styled.div`
@@ -82,9 +82,9 @@ const StyledInfo = styled.div`
       justify-content: space-between;
 
       div {
-        font-weight: 300;
+        font-weight: ${({ theme }) => theme.fontWeight.light};
         span {
-          font-weight: 500;
+          font-weight: ${({ theme }) => theme.fontWeight.normal};
         }
       }
     }
