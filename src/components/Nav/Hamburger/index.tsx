@@ -54,7 +54,7 @@ const StyledMenuElement = styled.div`
     -webkit-background-clip: text;
     color: transparent;
 
-    transition: ease-in all 0.25s;
+    transition: all 0.3s ease 0s;
     cursor: pointer;
   }
 `;
