@@ -104,7 +104,7 @@ const StyledCard = styled.div<{
     if (width) {
       return `${width}rem`;
     } else {
-      return "20rem";
+      return "19.5rem";
     }
   }};
 
@@ -112,7 +112,7 @@ const StyledCard = styled.div<{
     if (height) {
       return `${height}rem`;
     } else {
-      return "31rem";
+      return "27.5rem";
     }
   }};
 
@@ -172,7 +172,7 @@ const StyledHover = styled.div`
   min-height: 12rem;
 
   color: ${({ theme }) => theme.color.white};
-  transform: translateY(5rem);
+  transform: translateY(4rem);
   transition: all 0.9s;
 
   ${StyledCard}:hover & {
