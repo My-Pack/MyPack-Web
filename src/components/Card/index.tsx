@@ -9,10 +9,21 @@ interface IProps {
   date: string;
   color: string;
   img: string;
+  width?: string;
+  height?: string;
 }
 
 //TODO 글자수 제한
-function Card({ title, subTitle, content, date, img, color }: IProps) {
+function Card({
+  title,
+  subTitle,
+  content,
+  date,
+  img,
+  color,
+  width,
+  height,
+}: IProps) {
   const [click, setClick] = useState(false);
 
   function onClick() {
@@ -20,7 +31,7 @@ function Card({ title, subTitle, content, date, img, color }: IProps) {
   }
 
   return (
-    <StyledCard onClick={onClick} active={click}>
+    <StyledCard width={width} height={height} onClick={onClick} active={click}>
       <StyledFrame color={color}></StyledFrame>
       <StyledCardItemBackWrapper color={color}>
         <StyledTitleWrapper>{title}</StyledTitleWrapper>
@@ -29,7 +40,7 @@ function Card({ title, subTitle, content, date, img, color }: IProps) {
       <StyledCardItemWrapper color={color}>
         <StyledImageWrapper>
           <StyledImage>
-            {img && <Image src={img} alt="card_img" fill objectFit="cover" />}
+            <Image src={img} alt="card_img" fill objectFit="cover" />
           </StyledImage>
           <StyledHover>
             <span> {title}</span>
@@ -79,19 +90,35 @@ const StyledCardItemBackWrapper = styled(StyledCardItemWrapper)<{
   box-shadow: inset 10px 2px 80px 20px ${({ color }) => color};
 `;
 
-const StyledCard = styled.div<{ active: boolean }>`
+const StyledCard = styled.div<{
+  active: boolean;
+  width?: string;
+  height?: string;
+}>`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  width: 20rem;
-  height: 31rem;
+  width: ${({ width }) => {
+    if (width) {
+      return `${width}rem`;
+    } else {
+      return "19.5rem";
+    }
+  }};
+
+  height: ${({ height }) => {
+    if (height) {
+      return `${height}rem`;
+    } else {
+      return "27.5rem";
+    }
+  }};
 
   border-radius: 15px;
   color: black;
   font-weight: ${({ theme }) => theme.fontWeight.light};
-
   transition: 0.4s;
   transform-style: preserve-3d;
   transform: ${({ active }) => {
@@ -145,7 +172,7 @@ const StyledHover = styled.div`
   min-height: 12rem;
 
   color: ${({ theme }) => theme.color.white};
-  transform: translateY(5rem);
+  transform: translateY(4rem);
   transition: all 0.9s;
 
   ${StyledCard}:hover & {

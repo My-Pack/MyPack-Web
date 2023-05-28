@@ -6,18 +6,41 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
+
 import { RefObject, useEffect, useRef } from "react";
+import Card from "src/components/Card";
 import CardItem from "src/components/Card/CardItem";
 import styled from "styled-components";
+import { useHover } from "usehooks-ts";
 
 interface IProps {
   drag?: boolean;
   dragEffect?: false | Partial<BoundingBox> | RefObject<Element> | undefined;
+
+  title?: string;
+  subTitle?: string;
+  content?: string;
+  date?: string;
+  color?: string;
+  img?: string;
+  width?: string;
+  height?: string;
 }
 
-function CardEffectItem({ drag, dragEffect }: IProps) {
+function CardEffectItem({
+  drag,
+  dragEffect,
+  title,
+  subTitle,
+  content,
+  date,
+  img,
+  color,
+  width,
+  height,
+}: IProps) {
   // 카드 요소
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
 
   // useMotionValue은 말그대로 motion의 value
   const mouseX = useMotionValue(
@@ -40,11 +63,12 @@ function CardEffectItem({ drag, dragEffect }: IProps) {
     const currentInform = cardRef.current.getBoundingClientRect();
 
     const newRotateX = newMouseY - currentInform.top - currentInform.height / 2;
+
     return -newRotateX / effect;
   });
 
   const rotateY = useTransform(mouseX, (newMouseX) => {
-    if (!cardRef.current) {
+    if (!cardRef.current?.focus) {
       return 0;
     }
     const currentInform = cardRef.current.getBoundingClientRect();
@@ -93,10 +117,18 @@ function CardEffectItem({ drag, dragEffect }: IProps) {
     };
   }, []);
 
+  const isHover = useHover(cardRef);
+
+  const cardHover = () => {
+    if (isHover) {
+      return { rotateX, rotateY };
+    }
+  };
+
   return (
     <StyledWrapper>
       <StyledCardWrapper
-        style={{ rotateX, rotateY }}
+        style={cardHover()}
         drag={drag}
         dragConstraints={dragEffect}
         dragSnapToOrigin={true}
@@ -105,7 +137,20 @@ function CardEffectItem({ drag, dragEffect }: IProps) {
           ref={cardRef}
           style={{ backgroundImage: lightGradient }}
         >
-          <CardItem />
+          {title && content && date && img && color && width && height ? (
+            <Card
+              title={title}
+              subTitle={subTitle}
+              content={content}
+              date={date}
+              img={img}
+              color={color}
+              width={width}
+              height={height}
+            />
+          ) : (
+            <CardItem />
+          )}
         </StyledCardEffect>
       </StyledCardWrapper>
     </StyledWrapper>
@@ -130,6 +175,8 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledCardEffect = styled(motion.div)`
+  width: fit-content;
+  height: fit-content;
   border-radius: 20px;
   backdrop-filter: blur(4px) brightness(120%);
   box-shadow: 0px 0px 40px 10px rgb(57, 58, 64, 0.1);
