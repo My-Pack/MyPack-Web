@@ -5,6 +5,7 @@ const color = {
   black: "#000000",
   background: "#202124",
   buttonHoverBlack: "#3a3939",
+  semiBlack: "#232323",
   grey: "#353535",
   grey100: "#808080",
   grey500: "#6e6e6e",
@@ -13,7 +14,7 @@ const color = {
   borderGrey: "#707070",
   glass: "rgba(0,0,0,0)", //투명
   neonMint: "#0ff",
-  neonPink: "#f0f"
+  neonPink: "#f0f",
 };
 
 const fontWeight = {

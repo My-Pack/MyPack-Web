@@ -2,9 +2,11 @@ import { useRouter } from "next/router";
 import { FormEvent } from "react";
 import CardEffectItem from "src/components/Card/CardEffectItem";
 import Nav from "src/components/Nav";
+import SinglePageLikeList from "src/components/SinglePageLikeList";
 import useComment from "src/hooks/api/useComment";
 import useTextArea from "src/hooks/useTextArea";
 import styled from "styled-components";
+import { account } from "public/assets/images/accountClay.png";
 
 function Detail() {
   const {
@@ -28,6 +30,8 @@ function Detail() {
 
   return (
     <>
+      {/*styledCommentWrapper안에 넣었더니 중앙으로 이동하지 못해서 잠시 여기다 두었습니다 괜찮을까요? */}
+      <SinglePageLikeList />
       <Nav />
       <StyledWrapper>
         <StyledItemWrapper>
@@ -64,6 +68,7 @@ function Detail() {
                   ))} */}
                 </StyledCommentUl>
               </StyledCommentList>
+              <div>좋아요 112개</div>
 
               <StyledForm onSubmit={onSubmit}>
                 <textarea
