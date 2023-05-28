@@ -1,11 +1,14 @@
-import styled from "styled-components";
+import Link from "next/link";
 import Hamburger from "src/components/Nav/Hamburger";
 import Search from "src/components/Search";
+import styled from "styled-components";
 
 function Nav() {
   return (
     <StyledWrapper>
-      <StyledLogo>MyPack</StyledLogo>
+      <Link href="/">
+        <StyledLogo>MyPack</StyledLogo>
+      </Link>
       <Search />
       <Hamburger />
     </StyledWrapper>
@@ -25,4 +28,8 @@ const StyledWrapper = styled.nav`
 
 const StyledLogo = styled.h1`
   font-size: 1.55rem;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
