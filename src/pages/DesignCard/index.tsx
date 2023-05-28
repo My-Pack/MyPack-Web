@@ -78,7 +78,10 @@ function DesignCard() {
     <>
       {isOpen ? <HowTo onClick={onClick} /> : null}
       <Nav />
-      <button onClick={onClick}>눌러봐</button>
+      <StyledHowToBtnWrapper>
+        <StyleHowToBtn onClick={onClick}>HowTo</StyleHowToBtn>
+      </StyledHowToBtnWrapper>
+
       <StyledWrapper>
         <StyledCardWrapper>
           <PreviewCard
@@ -117,7 +120,7 @@ function DesignCard() {
             onChange={onChangeImageFile}
           />
           <StyledButtonWrapper>
-            <StyledButton>추가하기</StyledButton>
+            <StyledButton>저장하기</StyledButton>
           </StyledButtonWrapper>
         </StyledFormWrapper>
       </StyledWrapper>
@@ -136,7 +139,7 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   gap: 16rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
 `;
 
 const StyledCardWrapper = styled.div``;
@@ -180,4 +183,31 @@ const StyledBorderWrapper = styled.select`
   font-size: 0.9rem;
   letter-spacing: 0.6px;
   margin-bottom: 2.3rem;
+`;
+
+const StyledHowToBtnWrapper = styled.div`
+  position: absolute;
+  right: 0px;
+  margin: 0rem 2rem;
+`;
+
+const StyleHowToBtn = styled.button`
+  all: unset;
+  padding: 0.5rem 1rem;
+
+  border-radius: ${({ theme }) => theme.borderRadius.input};
+  background-color: rgb(112, 112, 112, 0.2);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+  font-size: 0.7rem;
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
+
+  transition: all 0.3s ease 0s;
+
+  :hover {
+    cursor: pointer;
+    background-color: ${({ theme }) => theme.color.neonPink};
+    box-shadow: 0px 15px 20px #5c1d5f;
+    transform: translateY(-3px);
+  }
 `;

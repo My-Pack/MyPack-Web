@@ -46,8 +46,7 @@ const StyledWrapper = styled.div`
 
   background-color: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(5px);
-  color: ${({ theme }) => theme.color.white};
-
+  color: rgb(255, 255, 255, 0.92);
   z-index: 1001;
   overflow: auto;
 `;
@@ -77,11 +76,11 @@ const StyledItemInWrapper = styled.div`
   ol,
   li {
     margin-bottom: 2.5rem;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   li {
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -118,6 +117,7 @@ const StyledItemInWrapper = styled.div`
 `;
 
 const StyledTitle = styled.span`
+  color: ${({ theme }) => theme.color.white};
   font-size: 3rem;
   font-weight: ${({ theme }) => theme.fontWeight.semibold};
   font-style: italic;

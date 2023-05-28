@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import Link from "next/link";
+import { useState } from "react";
 import styled, { css } from "styled-components";
 
 function Hamburger() {
@@ -13,10 +14,19 @@ function Hamburger() {
         <Styledhamburger isOpen={isOpen} />
       </StyledMenuWrapper>
       <StyledMenuListWrapper isOpen={isOpen}>
-        <StyledMenuElement>내 정보</StyledMenuElement>
-        <StyledMenuElement>알림</StyledMenuElement>
-        <StyledMenuElement>나중에 추가</StyledMenuElement>
-        <StyledMenuElement>나중에 추가</StyledMenuElement>
+        <Link href="/designCard">
+          <StyledMenuElement>Card Design</StyledMenuElement>
+        </Link>
+        <Link href="/profile">
+          <StyledMenuElement>My Card</StyledMenuElement>
+        </Link>
+        <Link href="/introduce">
+          <StyledMenuElement>Introduce MyPack</StyledMenuElement>
+        </Link>
+
+        <Link href="/login">
+          <StyledMenuElement>Login</StyledMenuElement>
+        </Link>
       </StyledMenuListWrapper>
     </>
   );
@@ -24,22 +34,41 @@ function Hamburger() {
 
 export default Hamburger;
 
-const StyledMenuElement = styled.p`
-  font-size: 1.56rem;
-  color: ${({ theme }) => theme.color.white};
-  font-weight: 400;
-  cursor: pointer;
+const StyledMenuElement = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+
+  :hover {
+    font-weight: ${({ theme }) => theme.fontWeight.bold};
+    background-image: linear-gradient(
+      to right,
+      ${({ theme }) => theme.color.neonMint},
+      ${({ theme }) => theme.color.neonPink}
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+  }
 `;
 
 const StyledMenuListWrapper = styled.div<{ isOpen: boolean }>`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  padding-right: 2rem;
   gap: 10%;
   width: 25vw;
   height: 100vh;
-  background-color: #83838321;
+  background-color: rgb(32, 32, 32, 0.7);
   position: fixed;
   transition: right 0.8s ease;
 

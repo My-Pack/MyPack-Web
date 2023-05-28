@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styled from "styled-components";
-import Hamburger from "src/components/Nav/Hamburger";
-import Info from "src/components/Profile/Info";
-import ProfileCardList from "src/components/Profile/CardList/ProfileCardList";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import Loading from "src/components/Loading";
+import Hamburger from "src/components/Nav/Hamburger";
+import ProfileCardList from "src/components/Profile/CardList/ProfileCardList";
+import Info from "src/components/Profile/Info";
+import styled from "styled-components";
 
 // Todo: Info 배경 레이아웃 적용
 // Todo: Info 프로필 사진 적용
@@ -38,18 +38,14 @@ function Profile() {
         <Hamburger />
       </div>
       <StyledBackgroundImage>
-        <Image
-          src={profile?.backgroundImage as string}
-          fill
-          alt="backgroundImage"
-        />
+        <Image src={profile?.backgroundImage} fill alt="backgroundImage" />
       </StyledBackgroundImage>
       <Info
-        profileImage={profile?.profileImage as string}
-        name={profile?.name as string}
-        quantity={profile?.quantity as IQuantity}
+        profileImage={profile?.profileImage}
+        name={profile?.name}
+        quantity={profile?.quantity}
       />
-      <ProfileCardList content={profile?.content as IGetCardDataContent[]} />
+      <ProfileCardList content={profile?.content} />
     </StyledProfile>
   ) : (
     <Loading />
@@ -57,6 +53,7 @@ function Profile() {
 }
 
 export default Profile;
+
 const StyledBackgroundImage = styled.div`
   position: fixed;
   height: 18.75rem;
