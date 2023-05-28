@@ -208,7 +208,6 @@ const StyleHowToBtn = styled.button`
     cursor: pointer;
     background-color: ${({ theme }) => theme.color.neonPink};
     box-shadow: 0px 15px 20px #5c1d5f;
-    color: #fff;
     transform: translateY(-3px);
   }
 `;
