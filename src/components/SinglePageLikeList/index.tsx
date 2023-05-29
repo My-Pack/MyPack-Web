@@ -86,13 +86,19 @@ function LikeListItem(item: ISingleCardLikeListItem) {
   );
 }
 
-function SinglePageLikeList() {
-  return (
+function SinglePageLikeList({
+  visible,
+  onClickClose,
+}: {
+  visible: boolean;
+  onClickClose: () => void;
+}) {
+  return visible ? (
     <StyledSinglePageLikeList>
       <StyledLikeList>
         <div className="titleBar">
           <div className="title">좋아요</div>
-          <div className="close">
+          <div className="close" onClick={onClickClose}>
             <CloseIcon />
           </div>
         </div>
@@ -108,7 +114,7 @@ function SinglePageLikeList() {
         </div>
       </StyledLikeList>
     </StyledSinglePageLikeList>
-  );
+  ) : null;
 }
 
 export default SinglePageLikeList;
