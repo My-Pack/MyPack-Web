@@ -1,75 +1,84 @@
 import React from "react";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
-
+import Image from "next/image";
+//Todo 프로필 작은 사진 적용 v
+//Todo 좋아요 목록 컴포넌트 호출 훅 작성
+//Todo 팔로우 버튼 클릭시 팔로우 되도록 함수 연결
 //get SinglePageLikeList api 노션 작성 예정
 
 const likeList = [
   //추후 서버 연결 후 제거 예정
   {
     id: 1,
-    photo: "test",
+    photo: "https://avatars.githubusercontent.com/u/50162076?v=4",
     name: "jae_gwan_",
   },
   {
     id: 2,
-    photo: "test",
+    photo: "https://avatars.githubusercontent.com/u/50162076?v=4",
     name: "jae_gwan_",
   },
   {
     id: 3,
-    photo: "test",
+    photo: "https://avatars.githubusercontent.com/u/50162076?v=4",
     name: "jae_gwan_",
   },
   {
     id: 4,
-    photo: "test",
+    photo: "https://avatars.githubusercontent.com/u/50162076?v=4",
     name: "jae_gwan_",
   },
   {
     id: 5,
-    photo: "test",
+    photo: "https://avatars.githubusercontent.com/u/50162076?v=4",
     name: "jae_gwan_",
   },
   {
     id: 6,
-    photo: "test",
+    photo: "https://avatars.githubusercontent.com/u/50162076?v=4",
     name: "jae_gwan_",
   },
   {
     id: 7,
 
-    photo: "test",
+    photo: "https://avatars.githubusercontent.com/u/50162076?v=4",
     name: "jae_gwan_",
   },
   {
     id: 8,
-    photo: "test",
+    photo: "https://avatars.githubusercontent.com/u/50162076?v=4",
     name: "jae_gwan_",
   },
   {
     id: 9,
-    photo: "test",
+    photo: "https://avatars.githubusercontent.com/u/50162076?v=4",
     name: "jae_gwan_",
   },
   {
     id: 10,
-    photo: "test",
+    photo: "https://avatars.githubusercontent.com/u/50162076?v=4",
     name: "jae_gwan_",
   },
   {
     id: 11,
 
-    photo: "test",
+    photo: "https://avatars.githubusercontent.com/u/50162076?v=4",
     name: "jae_gwan_",
   },
 ];
+
+function onClickFollow() {
+  //Todo 팔로우 버튼 클릭시 팔로우 되도록 함수 연결
+}
 
 function LikeListItem(item: ISingleCardLikeListItem) {
   return (
     <StyledLikeListItem>
       <div className="photoAndName">
-        <div className="photo"></div>
+        <div className="photo">
+          <Image src={item.photo} fill alt="profile" />
+        </div>
         <div className="name">{item.name}</div>
       </div>
       <div className="btnFollow">팔로우</div>
@@ -110,9 +119,11 @@ const StyledLikeListItem = styled.div`
     flex-direction: row;
 
     .photo {
+      position: relative;
       margin: 0 1rem;
       background-color: white;
       border-radius: 50%;
+      overflow: hidden;
       width: 2.5rem;
       height: 2.5rem;
     }
