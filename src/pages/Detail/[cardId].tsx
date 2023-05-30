@@ -6,7 +6,6 @@ import SinglePageLikeList from "src/components/SinglePageLikeList";
 import useComment from "src/hooks/api/useComment";
 import useTextArea from "src/hooks/useTextArea";
 import styled from "styled-components";
-import { account } from "public/assets/images/accountClay.png";
 import useModal from "src/hooks/useModal";
 
 function Detail() {
