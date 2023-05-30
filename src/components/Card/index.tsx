@@ -42,20 +42,21 @@ function Card({
         height={height}
         onClick={onClick}
         active={click}
+        color={color}
       >
         <StyledFrame color={color}></StyledFrame>
         <StyledCardItemBackWrapper color={color}>
           <StyledTitleWrapper>{title}</StyledTitleWrapper>
           <StyledSubTitleWrapper>{subTitle}</StyledSubTitleWrapper>
           {blur ? (
-            <div>
+            <StyledContentBlurWrapper>
               <StyledContentBlur>
                 자세한 내용을 보고 싶다면 아래 돋보기를 클릭하세요!
               </StyledContentBlur>
               <StyledContentWrapper>{content}</StyledContentWrapper>
-            </div>
+            </StyledContentBlurWrapper>
           ) : (
-            <StyledContentWrapper>{content}</StyledContentWrapper>
+            <StyledContentWrapperNoBlur>{content}</StyledContentWrapperNoBlur>
           )}
         </StyledCardItemBackWrapper>
         <StyledCardItemWrapper color={color}>
@@ -64,7 +65,7 @@ function Card({
               <Image src={img} alt="card_img" fill objectFit="cover" />
             </StyledImage>
             <StyledHover>
-              <span> {title}</span>
+              <span>{title}</span>
               <p>{date}</p>
               {subTitle && <p>{subTitle}</p>}
             </StyledHover>
@@ -82,6 +83,7 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const StyledFrame = styled.div<{ color: string }>`
   position: absolute;
   width: 100%;
@@ -95,7 +97,7 @@ const StyledFrame = styled.div<{ color: string }>`
   }};
 `;
 
-const StyledCardItemWrapper = styled.div<{ color: string }>`
+const StyledCardItemWrapper = styled.div`
   position: absolute;
   backface-visibility: hidden;
   width: 100%;
@@ -103,8 +105,6 @@ const StyledCardItemWrapper = styled.div<{ color: string }>`
   background-color: rgb(207, 205, 205);
   border-radius: 15px;
   overflow-wrap: break-word;
-  box-shadow: ${({ color }) => color} 10px 0px 50px -20px,
-    ${({ color }) => color} -10px 30px 60px -30px;
 `;
 
 const StyledCardItemBackWrapper = styled(StyledCardItemWrapper)<{
@@ -122,11 +122,15 @@ const StyledCard = styled.div<{
   active: boolean;
   width?: string;
   height?: string;
+  color: string;
 }>`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  box-shadow: ${({ color }) => color} 10px 0px 50px -20px,
+    ${({ color }) => color} -10px 30px 60px -30px;
 
   width: ${({ width }) => {
     if (width) {
@@ -192,7 +196,13 @@ const StyledContentWrapper = styled.div`
   letter-spacing: 0.5px;
   margin-top: 1rem;
   opacity: 0.9;
-  overflow: scroll;
+`;
+
+const StyledContentWrapperNoBlur = styled(StyledContentWrapper)`
+  font-size: 1rem;
+  padding: 0 1rem;
+  line-height: 1.5rem;
+  overflow: auto;
 `;
 
 const StyledHover = styled.div`
@@ -225,10 +235,18 @@ const StyledHover = styled.div`
   }
 `;
 
+const StyledContentBlurWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 19rem;
+`;
+
 const StyledContentBlur = styled.div`
   position: absolute;
   backdrop-filter: blur(0.3125rem);
-  height: 18.75rem;
+  height: 19rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -237,5 +255,6 @@ const StyledContentBlur = styled.div`
   font-size: 0.9rem;
   font-weight: ${({ theme }) => theme.fontWeight.semibold};
   letter-spacing: 0.5px;
-  padding: 0 2rem;
+  padding: 0 2.5rem;
+  margin-bottom: 2.5rem;
 `;
