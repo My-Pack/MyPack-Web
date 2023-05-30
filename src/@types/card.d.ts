@@ -26,3 +26,9 @@ interface ITheme {
   img: string;
   color: string;
 }
+
+interface ISingleCardLikeListItem {
+  id: number;
+  photo: string;
+  name: string;
+}

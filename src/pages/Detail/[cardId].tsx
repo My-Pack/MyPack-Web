@@ -2,15 +2,18 @@ import { useRouter } from "next/router";
 import { FormEvent } from "react";
 import CardEffectItem from "src/components/Card/CardEffectItem";
 import Nav from "src/components/Nav";
+import SinglePageLikeList from "src/components/SinglePageLikeList";
 import useComment from "src/hooks/api/useComment";
 import useTextArea from "src/hooks/useTextArea";
 import styled from "styled-components";
+import useModal from "src/hooks/useModal";
 
 function Detail() {
   const {
     query: { cardId },
   } = useRouter();
 
+  const { visible, updateVisible } = useModal();
   const { value, onChange, clearValue } = useTextArea({});
   const { createComment, deleteComment, comments } = useComment({ cardId });
 
@@ -28,6 +31,8 @@ function Detail() {
 
   return (
     <>
+      {/*styledCommentWrapper안에 넣었더니 중앙으로 이동하지 못해서 잠시 여기다 두었습니다 괜찮을까요? */}
+      <SinglePageLikeList visible={visible} onClickClose={updateVisible} />
       <Nav />
       <StyledWrapper>
         <StyledItemWrapper>
@@ -64,6 +69,9 @@ function Detail() {
                   ))} */}
                 </StyledCommentUl>
               </StyledCommentList>
+              <div className="like" onClick={updateVisible}>
+                좋아요 112개
+              </div>
 
               <StyledForm onSubmit={onSubmit}>
                 <textarea
@@ -124,6 +132,13 @@ const StyledCommentItem = styled.div`
     border: 1px solid rgb(38, 38, 38);
     border-bottom: none;
   }
+  .like {
+    margin-top: 1.875rem;
+    cursor: pointer;
+    &:hover {
+      color: ${({ theme }) => theme.color.grey50};
+    }
+  }
 `;
 
 const StyledUser = styled.div`
@@ -131,6 +146,7 @@ const StyledUser = styled.div`
   font-size: 1.4rem;
   letter-spacing: 0.6px;
   cursor: pointer;
+  z-index: 1000;
 `;
 
 const StyledCommentList = styled.div`
