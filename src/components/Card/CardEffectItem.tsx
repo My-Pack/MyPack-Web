@@ -139,6 +139,8 @@ function CardEffectItem({
         >
           {title && content && date && img && color && width && height ? (
             <Card
+              btn={false}
+              blur={false}
               title={title}
               subTitle={subTitle}
               content={content}
