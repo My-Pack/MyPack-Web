@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import Image from "next/image";
+import Link from "next/link";
 
 function Info({
   name,
@@ -20,10 +21,12 @@ function Info({
       <div className="infos">
         <div className="nameAndProfileset">
           <div className="name">{name}</div>
-          <div className="profileset">
-            <SettingsRoundedIcon />
-            프로필 설정
-          </div>
+          <Link href="/profile/edit">
+            <div className="profileset">
+              <SettingsRoundedIcon />
+              프로필 설정
+            </div>
+          </Link>
         </div>
         <div className="quantity">
           <div>
