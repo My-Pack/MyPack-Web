@@ -1,6 +1,7 @@
-import Link from "next/link";
 import { useState } from "react";
-import Card from "src/components/Card";
+import CardList from "src/components/CardList";
+import Footer from "src/components/Main/Footer";
+import SectionTitle from "src/components/Main/SectionTitle";
 import Nav from "src/components/Nav";
 import useGetCard from "src/hooks/api/useGetCard";
 import styled from "styled-components";
@@ -18,40 +19,12 @@ function Home() {
 
   // 실제 서버와 연결
   const { card, isLoading } = useGetCard();
-  
+
   // Link 에는 cardId가 들어갈 예정
   return (
     <>
       <Nav />
       <StyledWrapper>
-        <Link href="/Detail/1">
-          <Card
-            title="한강간 날"
-            content="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum"
-            date="2023.06.03"
-            color="pink"
-            img="https://github.com/My-Pack/MyPack-Web/assets/63100352/958a401b-6560-4ef5-aae3-0c234eab44c2"
-          />
-        </Link>
-        <Link href="/Detail/2">
-          <Card
-            title="부제목있는 버전"
-            content="귀여운 강아지 설이"
-            subTitle="설이랑 🐶"
-            date="2023.06.03"
-            color="yellow"
-            img="https://github.com/My-Pack/MyPack-Web/assets/63100352/538008df-56bc-44cf-8ff6-e2756f770562"
-          />
-        </Link>
-        <Link href="/Detail/3">
-          <Card
-            title="해커톤"
-            content="재밌었던 해커톤"
-            date="2023.06.03"
-            color="white"
-            img="https://github.com/My-Pack/MyPack-Web/assets/63100352/c130d416-c5b9-4a78-990e-87be9c11eeb4"
-          />
-        </Link>
         {/* {card?.content.map((data) => {
           return (
             <div onClick={onClick}>
@@ -65,7 +38,15 @@ function Home() {
             </div>
           );
         })} */}
+
+        <SectionTitle title="Today Card" subTitle="HOT" />
+        <CardList />
+
+        <SectionTitle title="Card" subTitle="NEW" />
+        <CardList />
       </StyledWrapper>
+
+      <Footer />
     </>
   );
 }
@@ -78,7 +59,8 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  gap: 6rem;
+  flex-direction: column;
+
   padding: 1rem 3rem;
 `;
 
