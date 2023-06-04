@@ -1,19 +1,59 @@
 import { Style } from "@mui/icons-material";
-import React, { useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Hamburger from "src/components/Nav/Hamburger";
+// TODO : 이미지 업로드에 따른 이미지 변경
+// TODO : 해당 이미지 묶어서 업로드
+const profileImageExample = {
+  profile: {
+    file: null,
+    url: "https://avatars.githubusercontent.com/u/50162076?v=4",
+  },
+  background: {
+    file: null,
+    url: "https://avatars.githubusercontent.com/u/50162076?v=4",
+  },
+};
 
 function Edit() {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadFiles, setUploadFiles] = useState<IUploadFiles | null>(
+    profileImageExample,
+  );
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
+  useEffect(() => {
+    console.log(uploadFiles);
+  }, [uploadFiles]);
+
+  const handleFileChange = (event: any) => {
+    const img = event.target.files[0];
+    const copyUploadFiles = JSON.parse(JSON.stringify(uploadFiles));
+    if (event.target.name === "profile") {
+      copyUploadFiles.profile = {
+        file: img as File,
+        url: URL.createObjectURL(img),
+      };
+    } else if (event.target.name === "background") {
+      copyUploadFiles.background = {
+        file: img as File,
+        url: URL.createObjectURL(img),
+      };
+    }
+    setUploadFiles(copyUploadFiles);
+
+    console.log(img);
+    console.log(event.target.name);
   };
-  const imageInput = useRef<any>();
-  const onCickImageUpload = () => {
-    imageInput.current.click();
+  const profileImageInput = useRef<any>();
+  const backgroundImageInput = useRef<any>();
+
+  const onClickProfileImageUpload = () => {
+    profileImageInput.current.click();
   };
+  const onClickBackgroundImageUpload = () => {
+    backgroundImageInput.current.click();
+  };
+
   return (
     <StyledEditWrapper>
       <StyledHamberger>
@@ -25,31 +65,42 @@ function Edit() {
         <StyledEditProfileImage>
           <div className="profilePhoto">
             <StyledImage
-              src="https://avatars.githubusercontent.com/u/50162076?v=4"
+              src={uploadFiles?.profile.url as string}
               alt="profileImage"
               fill
             />
           </div>
-          <input type="file" style={{ display: "none" }} ref={imageInput} />
-          <div onClick={onCickImageUpload} className="upload">
+          <input
+            type="file"
+            style={{ display: "none" }}
+            ref={profileImageInput}
+            onChange={handleFileChange}
+            name="profile"
+          />
+          <div onClick={onClickProfileImageUpload} className="upload">
             프로필 사진 업로드
           </div>
         </StyledEditProfileImage>
         <StyledEditBackgroundImage>
           <div className="backgroundPhoto">
             <StyledImage
-              src="https://avatars.githubusercontent.com/u/50162076?v=4"
+              src={uploadFiles?.background.url as string}
               alt="profileImage"
               fill
             />
           </div>
-          <div className="upload">배경 사진 업로드</div>
+          <input
+            type="file"
+            style={{ display: "none" }}
+            ref={backgroundImageInput}
+            onChange={handleFileChange}
+            name="background"
+          />
+          <div className="upload" onClick={onClickBackgroundImageUpload}>
+            배경 사진 업로드
+          </div>
         </StyledEditBackgroundImage>
-        <div
-          onClick={onCickImageUpload}
-          className="upload"
-          style={{ alignSelf: "center" }}
-        >
+        <div className="upload" style={{ alignSelf: "center" }}>
           제출
         </div>
       </StyledEdit>
@@ -131,6 +182,7 @@ const StyledEdit = styled.div`
       color: transparent;
     }
   }
+  padding-bottom: 6.25rem;
 `;
 
 const StyledEditWrapper = styled.div`
