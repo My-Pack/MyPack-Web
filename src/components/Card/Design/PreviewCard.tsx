@@ -1,20 +1,37 @@
 import Image from "next/image";
+import { MouseEvent } from "react";
 import styled from "styled-components";
 
 interface IProps {
   active: boolean;
   title: string;
+  subTitle: string;
   content: string;
   color: string;
   img: string;
+  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
-function PreviewCard({ active, title, content, img, color }: IProps) {
+function PreviewCard({
+  active,
+  title,
+  subTitle,
+  content,
+  img,
+  color,
+  onClick,
+}: IProps) {
   return (
-    <StyledCard active={active}>
+    <StyledCard
+      onClick={(e) => {
+        onClick?.(e);
+      }}
+      active={active}
+    >
       <StyledFrame color={color}></StyledFrame>
       <StyledCardItemBackWrapper color={color}>
         <StyledTitleWrapper>{title}</StyledTitleWrapper>
+        <StyledSubTitleWrapper>{subTitle}</StyledSubTitleWrapper>
         <StyledContentWrapper>{content}</StyledContentWrapper>
       </StyledCardItemBackWrapper>
       <StyledCardItemWrapper color={color}>
@@ -110,6 +127,10 @@ const StyledTitleWrapper = styled.div`
   font-weight: ${({ theme }) => theme.fontWeight.semibold};
   letter-spacing: 1px;
   font-style: italic;
+`;
+
+const StyledSubTitleWrapper = styled.div`
+  font-size: 0.78rem;
 `;
 
 const StyledContentWrapper = styled.div`

@@ -13,6 +13,7 @@ import styled from "styled-components";
 
 function DesignCard() {
   const [title, setTitle] = useState<string>("");
+  const [subTitle, setSubTitle] = useState<string>("");
   const [summary, setSummary] = useState<string>("");
   const [theme, setTheme] = useState<string>("");
   const [file, setFile] = useState<File>();
@@ -25,6 +26,10 @@ function DesignCard() {
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
+  };
+
+  const onChangeSubTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    setSubTitle(e.target.value);
   };
 
   const onChangeSummary = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -85,8 +90,10 @@ function DesignCard() {
       <StyledWrapper>
         <StyledCardWrapper>
           <PreviewCard
+            onClick={() => setIsClick(!isClick)}
             active={isClick ? true : false}
             title={title}
+            subTitle={subTitle}
             content={summary}
             color={theme}
             img={previewImage}
@@ -97,15 +104,20 @@ function DesignCard() {
           encType="multipart/form-data"
           method="post"
         >
+          <Title title="제목" subTitle="카드를 제목을 지어주세요" essential />
           <FormTitle
             onClick={() => setIsClick(true)}
             onChange={onChangeTitle}
+          />
+          <Title title="부제목" subTitle="카드의 부제목을 지어주세요" />
+          <FormTitle
+            onClick={() => setIsClick(true)}
+            onChange={onChangeSubTitle}
           />
           <FormSummary
             onClick={() => setIsClick(true)}
             onChange={onChangeSummary}
           />
-
           <Title title="테마" subTitle="카드의 테마를 정할 수 있어요" />
           <StyledBorderWrapper
             onChange={(e) => setTheme(e.target.value)}
@@ -176,7 +188,7 @@ const StyledButton = styled.button`
 
 const StyledBorderWrapper = styled.select`
   all: unset;
-  padding: 1rem 1rem;
+  padding: 1rem;
   background-color: ${({ theme }) => theme.color.borderBackground};
   border-radius: ${({ theme }) => theme.borderRadius.input};
   font-weight: ${({ theme }) => theme.fontWeight.normal};

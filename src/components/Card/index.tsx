@@ -3,6 +3,7 @@ import html2canvas from "html2canvas";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
+import Btn from "src/components/Card/Btn";
 import styled from "styled-components";
 
 interface IProps {
@@ -14,6 +15,8 @@ interface IProps {
   img: string;
   width?: string;
   height?: string;
+  blur: boolean;
+  btn: boolean;
 }
 
 //TODO 글자수 제한
@@ -26,6 +29,8 @@ function Card({
   color,
   width,
   height,
+  blur,
+  btn,
 }: IProps) {
   const [click, setClick] = useState(false);
   const router = useRouter();
@@ -61,13 +66,14 @@ function Card({
   };
 
   return (
-    <div>
+    <StyledWrapper>
       <StyledCard
         width={width}
         height={height}
         onClick={onClick}
         active={click}
         ref={divRef}
+        color={color}
       >
         <StyledFrame color={color}></StyledFrame>
         <StyledCardItemBackWrapper color={color}>
@@ -76,6 +82,20 @@ function Card({
         </StyledCardItemBackWrapper>
         <StyledCardItemWrapper color={color}>
           <StyledImageWrapper ref={imgRef}>
+          <StyledSubTitleWrapper>{subTitle}</StyledSubTitleWrapper>
+          {blur ? (
+            <StyledContentBlurWrapper>
+              <StyledContentBlur>
+                자세한 내용을 보고 싶다면 아래 돋보기를 클릭하세요!
+              </StyledContentBlur>
+              <StyledContentWrapper>{content}</StyledContentWrapper>
+            </StyledContentBlurWrapper>
+          ) : (
+            <StyledContentWrapperNoBlur>{content}</StyledContentWrapperNoBlur>
+          )}
+        </StyledCardItemBackWrapper>
+        <StyledCardItemWrapper color={color}>
+          <StyledImageWrapper>
             <StyledImage>
               <Image src={img} alt="card_img" fill objectFit="cover" />
             </StyledImage>
@@ -97,10 +117,17 @@ function Card({
         ""
       )}
     </div>
+      {btn ? <Btn /> : " "}
+    </StyledWrapper>
   );
 }
 
 export default Card;
+
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const StyledFrame = styled.div<{ color: string }>`
   position: absolute;
@@ -115,7 +142,7 @@ const StyledFrame = styled.div<{ color: string }>`
   }};
 `;
 
-const StyledCardItemWrapper = styled.div<{ color: string }>`
+const StyledCardItemWrapper = styled.div`
   position: absolute;
   backface-visibility: hidden;
   width: 100%;
@@ -123,16 +150,15 @@ const StyledCardItemWrapper = styled.div<{ color: string }>`
   background-color: rgb(249, 249, 249);
   border-radius: 15px;
   overflow-wrap: break-word;
-  box-shadow: ${({ color }) => color} 10px 0px 50px -20px,
-    ${({ color }) => color} -10px 30px 60px -30px;
 `;
 
 const StyledCardItemBackWrapper = styled(StyledCardItemWrapper)<{
   color: string;
 }>`
   transform: rotateY(180deg);
-  padding: 2rem;
-
+  padding: 2rem 1rem;
+  width: 100%;
+  height: 100%;
   background-color: rgb(220, 220, 220);
   box-shadow: inset 10px 2px 80px 20px ${({ color }) => color};
 `;
@@ -141,12 +167,16 @@ const StyledCard = styled.div<{
   active: boolean;
   width?: string;
   height?: string;
+  color: string;
 }>`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 3;
+
+  box-shadow: ${({ color }) => color} 10px 0px 50px -20px,
+    ${({ color }) => color} -10px 30px 60px -30px;
 
   width: ${({ width }) => {
     if (width) {
@@ -195,18 +225,29 @@ const StyledTitleWrapper = styled.div`
   font-weight: ${({ theme }) => theme.fontWeight.semibold};
   letter-spacing: 1px;
   font-style: italic;
+  padding: 0 1rem;
+`;
+
+const StyledSubTitleWrapper = styled.div`
+  font-size: 0.78rem;
+  padding: 0 1rem;
 `;
 
 const StyledContentWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 18.75rem;
   font-weight: ${({ theme }) => theme.fontWeight.light};
-  font-size: 1rem;
+  font-size: 0.8rem;
   letter-spacing: 0.5px;
   margin-top: 1rem;
   opacity: 0.9;
+`;
 
+const StyledContentWrapperNoBlur = styled(StyledContentWrapper)`
+  font-size: 1rem;
+  padding: 0 1rem;
+  line-height: 1.5rem;
   overflow: auto;
 `;
 
@@ -259,4 +300,27 @@ const StyledBtnWrapper = styled.div`
   button {
     all: unset;
   }
+
+const StyledContentBlurWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 19rem;
+`;
+
+const StyledContentBlur = styled.div`
+  position: absolute;
+  backdrop-filter: blur(0.3125rem);
+  height: 19rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  z-index: 2;
+  font-size: 0.9rem;
+  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  letter-spacing: 0.5px;
+  padding: 0 2.5rem;
+  margin-bottom: 2.5rem;
 `;

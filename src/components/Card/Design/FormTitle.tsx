@@ -11,7 +11,6 @@ interface IProps {
 function FormTitle({ onChange, onClick }: IProps) {
   return (
     <>
-      <Title title="제목" subTitle="카드를 제목을 지어주세요" essential />
       <StyledInput
         type="text"
         onClick={(e) => {

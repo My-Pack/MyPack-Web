@@ -1,5 +1,7 @@
 import { useState } from "react";
-import Card from "src/components/Card";
+import CardList from "src/components/CardList";
+import Footer from "src/components/Main/Footer";
+import SectionTitle from "src/components/Main/SectionTitle";
 import Nav from "src/components/Nav";
 import useGetCard from "src/hooks/api/useGetCard";
 import styled from "styled-components";
@@ -23,6 +25,7 @@ function Home() {
     <>
       <Nav />
       <StyledWrapper>
+
         <Card
           title="한강간 날"
           content="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum"
@@ -48,6 +51,7 @@ function Home() {
           img="https://github.com/My-Pack/MyPack-Web/assets/63100352/c130d416-c5b9-4a78-990e-87be9c11eeb4"
         />
 
+
         {/* {card?.content.map((data) => {
           return (
             <div onClick={onClick}>
@@ -61,7 +65,15 @@ function Home() {
             </div>
           );
         })} */}
+
+        <SectionTitle title="Today Card" subTitle="HOT" />
+        <CardList />
+
+        <SectionTitle title="Card" subTitle="NEW" />
+        <CardList />
       </StyledWrapper>
+
+      <Footer />
     </>
   );
 }
@@ -78,7 +90,8 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  gap: 6rem;
+  flex-direction: column;
+
   padding: 1rem 3rem;
 `;
 
