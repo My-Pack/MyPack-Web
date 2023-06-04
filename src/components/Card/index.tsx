@@ -40,22 +40,23 @@ function Card({
   const handleDownload = async () => {
     if (divRef.current && imgRef.current) {
       const defaultTransform = divRef.current.style.transform;
-      divRef.current.style.setProperty("transform", "none");
-      divRef.current.style.setProperty("transform-style", "none");
+      const defaultStyle = divRef.current.style;
+      defaultStyle.setProperty("transform", "none");
+      defaultStyle.setProperty("transform-style", "none");
 
-      divRef.current.style.setProperty("", "none");
+      defaultStyle.setProperty("", "none");
 
       const canvas = await html2canvas(divRef.current);
 
-      divRef.current.style.setProperty("transform-style", "none");
+      defaultStyle.setProperty("transform-style", "none");
 
       const element = document.createElement("a");
       element.href = canvas.toDataURL("image/png");
       element.download = "MyPack.png";
       element.click();
 
-      divRef.current.style.transform = defaultTransform;
-      divRef.current.style.setProperty("transform-style", "preserve-3d");
+      defaultStyle.transform = defaultTransform;
+      defaultStyle.setProperty("transform-style", "preserve-3d");
     }
   };
 
