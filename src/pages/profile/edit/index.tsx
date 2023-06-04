@@ -3,8 +3,7 @@ import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Hamburger from "src/components/Nav/Hamburger";
-// TODO : 이미지 업로드에 따른 이미지 변경
-// TODO : 해당 이미지 묶어서 업로드
+
 const profileImageExample = {
   profile: {
     file: null,
