@@ -190,7 +190,7 @@ const StyledSubTitleWrapper = styled.div`
 const StyledContentWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 18.75rem;
   font-weight: ${({ theme }) => theme.fontWeight.light};
   font-size: 0.8rem;
   letter-spacing: 0.5px;
