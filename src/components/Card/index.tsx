@@ -245,7 +245,7 @@ const StyledBtnWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: .625rem;
 
   width: fit-content;
   margin: 0.7rem 0;
