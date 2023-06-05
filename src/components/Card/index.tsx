@@ -72,16 +72,12 @@ function Card({
         height={height}
         onClick={onClick}
         active={click}
-        ref={divRef}
         color={color}
+        ref={divRef}
       >
         <StyledFrame color={color}></StyledFrame>
         <StyledCardItemBackWrapper color={color}>
           <StyledTitleWrapper>{title}</StyledTitleWrapper>
-          <StyledContentWrapper>{content}</StyledContentWrapper>
-        </StyledCardItemBackWrapper>
-        <StyledCardItemWrapper color={color}>
-          <StyledImageWrapper ref={imgRef}>
           <StyledSubTitleWrapper>{subTitle}</StyledSubTitleWrapper>
           {blur ? (
             <StyledContentBlurWrapper>
@@ -95,14 +91,14 @@ function Card({
           )}
         </StyledCardItemBackWrapper>
         <StyledCardItemWrapper color={color}>
-          <StyledImageWrapper>
+          <StyledImageWrapper ref={imgRef}>
             <StyledImage>
               <Image src={img} alt="card_img" fill objectFit="cover" />
             </StyledImage>
             <StyledHover>
-              {subTitle && <p>{subTitle}</p>}
-              <span> {title}</span>
+              <span>{title}</span>
               <p>{date}</p>
+              {subTitle && <p>{subTitle}</p>}
             </StyledHover>
           </StyledImageWrapper>
         </StyledCardItemWrapper>
@@ -116,7 +112,7 @@ function Card({
       ) : (
         ""
       )}
-    </div>
+
       {btn ? <Btn /> : " "}
     </StyledWrapper>
   );
@@ -286,7 +282,7 @@ const StyledBtnWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: .625rem;
+  gap: 0.625rem;
 
   width: fit-content;
   margin: 0.7rem 0;
@@ -300,12 +296,11 @@ const StyledBtnWrapper = styled.div`
   button {
     all: unset;
   }
-
+`;
 const StyledContentBlurWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   height: 19rem;
 `;
 

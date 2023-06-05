@@ -26,10 +26,10 @@ function CardList() {
       >
         <StyledSwiperSlide>
           <Card
-            btn={true}
+            btn={false}
             blur={true}
-            width="19"
-            height="25.7"
+            width="18"
+            height="24"
             title="한강간 날"
             subTitle="dsfasd"
             content="It is a long established fact t is a longt is a long established fact tht is a long established fact tht is a long established fact tht is a long established fact th established fact thht is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum"
@@ -80,7 +80,7 @@ const StyledSwiper = styled(Swiper)`
 
 const StyledSwiperSlide = styled(SwiperSlide)`
   width: fit-content;
-  height: 37.5rem;
+  height: 39rem;
 
   display: flex;
   justify-content: center;
