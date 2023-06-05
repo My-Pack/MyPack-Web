@@ -53,6 +53,10 @@ function Home() {
 
 export default Home;
 
+function html2canvas(div: HTMLDivElement, arg1: { scale: number }) {
+  throw new Error("Function not implemented.");
+}
+
 const StyledWrapper = styled.div`
   position: relative;
   overflow: hidden;

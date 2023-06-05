@@ -1,5 +1,8 @@
+import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import html2canvas from "html2canvas";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useRef, useState } from "react";
 import Btn from "src/components/Card/Btn";
 import styled from "styled-components";
 
@@ -30,10 +33,37 @@ function Card({
   btn,
 }: IProps) {
   const [click, setClick] = useState(false);
+  const router = useRouter();
 
   function onClick() {
     setClick(!click);
   }
+
+  const divRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLDivElement>(null);
+
+  const handleDownload = async () => {
+    if (divRef.current && imgRef.current) {
+      const defaultTransform = divRef.current.style.transform;
+      const defaultStyle = divRef.current.style;
+      defaultStyle.setProperty("transform", "none");
+      defaultStyle.setProperty("transform-style", "none");
+
+      defaultStyle.setProperty("", "none");
+
+      const canvas = await html2canvas(divRef.current);
+
+      defaultStyle.setProperty("transform-style", "none");
+
+      const element = document.createElement("a");
+      element.href = canvas.toDataURL("image/png");
+      element.download = "MyPack.png";
+      element.click();
+
+      defaultStyle.transform = defaultTransform;
+      defaultStyle.setProperty("transform-style", "preserve-3d");
+    }
+  };
 
   return (
     <StyledWrapper>
@@ -43,6 +73,7 @@ function Card({
         onClick={onClick}
         active={click}
         color={color}
+        ref={divRef}
       >
         <StyledFrame color={color}></StyledFrame>
         <StyledCardItemBackWrapper color={color}>
@@ -60,7 +91,7 @@ function Card({
           )}
         </StyledCardItemBackWrapper>
         <StyledCardItemWrapper color={color}>
-          <StyledImageWrapper>
+          <StyledImageWrapper ref={imgRef}>
             <StyledImage>
               <Image src={img} alt="card_img" fill objectFit="cover" />
             </StyledImage>
@@ -72,6 +103,16 @@ function Card({
           </StyledImageWrapper>
         </StyledCardItemWrapper>
       </StyledCard>
+      {router.asPath == "/" ? (
+        <StyledBtnWrapper>
+          <button onClick={handleDownload}>
+            <SaveAltIcon />
+          </button>
+        </StyledBtnWrapper>
+      ) : (
+        ""
+      )}
+
       {btn ? <Btn /> : " "}
     </StyledWrapper>
   );
@@ -102,7 +143,7 @@ const StyledCardItemWrapper = styled.div`
   backface-visibility: hidden;
   width: 100%;
   height: 100%;
-  background-color: rgb(207, 205, 205);
+  background-color: rgb(249, 249, 249);
   border-radius: 15px;
   overflow-wrap: break-word;
 `;
@@ -128,6 +169,7 @@ const StyledCard = styled.div<{
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 3;
 
   box-shadow: ${({ color }) => color} 10px 0px 50px -20px,
     ${({ color }) => color} -10px 30px 60px -30px;
@@ -149,7 +191,7 @@ const StyledCard = styled.div<{
   }};
 
   border-radius: 15px;
-  color: black;
+  color: ${({ theme }) => theme.color.black};
   font-weight: ${({ theme }) => theme.fontWeight.light};
   transition: 0.4s;
   transform-style: preserve-3d;
@@ -224,6 +266,7 @@ const StyledHover = styled.div`
   }
 
   span {
+    color: ${({ theme }) => theme.color.white};
     font-weight: ${({ theme }) => theme.fontWeight.semibold};
     font-size: 1.75rem;
   }
@@ -235,11 +278,29 @@ const StyledHover = styled.div`
   }
 `;
 
+const StyledBtnWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+
+  width: fit-content;
+  margin: 0.7rem 0;
+  padding: 0.2rem 0.5rem 0 0.5rem;
+  cursor: pointer;
+
+  border-radius: 5px;
+  backdrop-filter: blur(2px) brightness(120%);
+  box-shadow: 0px 0px 40px 10px rgb(57, 58, 64, 0.1);
+
+  button {
+    all: unset;
+  }
+`;
 const StyledContentBlurWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   height: 19rem;
 `;
 
