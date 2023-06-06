@@ -2,7 +2,7 @@ import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import html2canvas from "html2canvas";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Btn from "src/components/Card/Btn";
 import styled from "styled-components";
 
@@ -17,6 +17,7 @@ interface IProps {
   height?: string;
   blur: boolean;
   btn: boolean;
+  isActive: boolean;
 }
 
 //TODO 글자수 제한
@@ -31,12 +32,27 @@ function Card({
   height,
   blur,
   btn,
+  isActive,
 }: IProps) {
   const [click, setClick] = useState(false);
   const router = useRouter();
+  const [delayIsActive, setDelayIsActive] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isActive) {
+      setTimeout(() => {
+        setDelayIsActive(true);
+      }, 500);
+    } else {
+      setDelayIsActive(false);
+    }
+  }, [isActive]);
 
   function onClick() {
-    setClick(!click);
+    if (delayIsActive) {
+      setClick(!click);
+      console.log(isActive);
+    }
   }
 
   const divRef = useRef<HTMLDivElement>(null);

@@ -7,6 +7,7 @@ import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+// import { is } from "../../../.next/static/chunks/amp";
 
 function CardList() {
   return (
@@ -26,18 +27,21 @@ function CardList() {
         allowSlidePrev={true}
       >
         <StyledSwiperSlide>
-          <Card
-            btn={false}
-            blur={true}
-            width="18"
-            height="24"
-            title="한강간 날"
-            subTitle="dsfasd"
-            content="It is a long established fact t is a longt is a long established fact tht is a long established fact tht is a long established fact tht is a long established fact th established fact thht is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum"
-            date="2023.06.03"
-            color="pink"
-            img="https://github.com/My-Pack/MyPack-Web/assets/63100352/958a401b-6560-4ef5-aae3-0c234eab44c2"
-          />
+          {({ isActive }) => (
+            <Card
+              btn={false}
+              blur={true}
+              width="18"
+              height="24"
+              title="한강간 날"
+              subTitle="dsfasd"
+              content="It is a long established fact t is a longt is a long established fact tht is a long established fact tht is a long established fact tht is a long established fact th established fact thht is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum"
+              date="2023.06.03"
+              color="pink"
+              img="https://github.com/My-Pack/MyPack-Web/assets/63100352/958a401b-6560-4ef5-aae3-0c234eab44c2"
+              isActive={isActive}
+            />
+          )}
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <CardEffectItem />
