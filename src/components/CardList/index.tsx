@@ -22,6 +22,7 @@ function CardList() {
         slideToClickedSlide={true}
         allowTouchMove={false}
         allowSlideNext={true}
+        initialSlide={1}
         allowSlidePrev={true}
       >
         <StyledSwiperSlide>
