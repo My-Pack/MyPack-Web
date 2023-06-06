@@ -42,7 +42,7 @@ function Card({
     if (isActive) {
       setTimeout(() => {
         setDelayIsActive(true);
-      }, 500);
+      }, 1);
     } else {
       setDelayIsActive(false);
     }
