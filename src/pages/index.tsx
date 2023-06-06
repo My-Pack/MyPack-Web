@@ -18,7 +18,7 @@ function Home() {
   //   });
 
   // 실제 서버와 연결
-  const { card, isLoading } = useGetCard();
+  // const { card, isLoading } = useGetCard();
 
   // Link 에는 cardId가 들어갈 예정
   return (
