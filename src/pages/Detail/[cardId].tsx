@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { FormEvent } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import CardEffectItem from "src/components/Card/CardEffectItem";
 import Nav from "src/components/Nav";
 import SinglePageLikeList from "src/components/SinglePageLikeList";
@@ -7,11 +7,31 @@ import useComment from "src/hooks/api/useComment";
 import useTextArea from "src/hooks/useTextArea";
 import styled from "styled-components";
 import useModal from "src/hooks/useModal";
+import { instance } from "src/libs/api/api";
+// import { card } from "public/assets/images/card.png";
 
 function Detail() {
   const {
     query: { cardId },
   } = useRouter();
+
+  const router = useRouter();
+
+  let { isReady } = useRouter();
+  console.log(isReady);
+  const [cardData, setCardData] = useState<any>(null);
+  useEffect(() => {
+    if (isReady === true) {
+      console.log(isReady);
+      instance
+        .get(`/api/v1/cards/${cardId}`, { withCredentials: true })
+        .then((res) => {
+          console.log(cardId);
+          console.log(res);
+          setCardData(res);
+        });
+    }
+  }, [isReady]);
 
   const { visible, updateVisible } = useModal();
   const { value, onChange, clearValue } = useTextArea({});
@@ -28,8 +48,24 @@ function Detail() {
       deleteComment(id);
     }
   }
+  function onClickDelete() {
+    if (confirm("카드를 삭제하시겠습니까?")) {
+      instance
+        .delete(`/api/v1/cards/${cardId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            withCredentials: true,
+          },
+        })
+        .then((res) => {
+          alert("카드가 삭제되었습니다.");
+          router.push("/");
+        })
+        .catch(() => alert("카드가 삭제되지 못했습니다."));
+    }
+  }
 
-  return (
+  return cardData ? (
     <>
       {/*styledCommentWrapper안에 넣었더니 중앙으로 이동하지 못해서 잠시 여기다 두었습니다 괜찮을까요? */}
       <SinglePageLikeList visible={visible} onClickClose={updateVisible} />
@@ -41,16 +77,16 @@ function Detail() {
             <CardEffectItem
               width="25"
               height="37"
-              title="한강간 날"
+              title={cardData.title}
               content="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum"
-              date="2023.06.03"
-              color="pink"
-              img="https://github.com/My-Pack/MyPack-Web/assets/63100352/958a401b-6560-4ef5-aae3-0c234eab44c2"
+              date={cardData.createdAt.substring(0, 10)}
+              color={cardData.color}
+              img={cardData.imageUrl}
             />
           </StyledCardWrapper>
           <StyledCommentWrapper>
             <StyledCommentItem>
-              <StyledUser>카드 주인 user 명</StyledUser>
+              <StyledUser>{cardData.memberName}</StyledUser>
               <StyledCommentList>
                 <StyledCommentUl>
                   {/* {comments.map((comment) => (
@@ -70,7 +106,10 @@ function Detail() {
                 </StyledCommentUl>
               </StyledCommentList>
               <div className="like" onClick={updateVisible}>
-                좋아요 112개
+                좋아요 {cardData.likeCount}개
+              </div>
+              <div className="like" onClick={onClickDelete}>
+                카드 삭제
               </div>
 
               <StyledForm onSubmit={onSubmit}>
@@ -86,7 +125,7 @@ function Detail() {
         </StyledItemWrapper>
       </StyledWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Detail;

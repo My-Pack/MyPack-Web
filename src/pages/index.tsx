@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import CardList from "src/components/CardList";
 import Footer from "src/components/Main/Footer";
 import SectionTitle from "src/components/Main/SectionTitle";
 import Nav from "src/components/Nav";
 import useGetCard from "src/hooks/api/useGetCard";
 import styled from "styled-components";
+import Loading from "src/components/Loading";
 
 function Home() {
   const [cardData, setCardData] = useState<IGetCard | null>(null);
@@ -18,7 +19,7 @@ function Home() {
   //   });
 
   // 실제 서버와 연결
-  const { card, isLoading } = useGetCard();
+  // const { card, isLoading } = useGetCard();
 
   // Link 에는 cardId가 들어갈 예정
   return (
@@ -40,10 +41,14 @@ function Home() {
         })} */}
 
         <SectionTitle title="Today Card" subTitle="HOT" />
-        <CardList />
+        <Suspense fallback={<Loading />}>
+          <CardList />
+        </Suspense>
 
         <SectionTitle title="Card" subTitle="NEW" />
-        <CardList />
+        <Suspense fallback={<Loading />}>
+          <CardList />
+        </Suspense>
       </StyledWrapper>
 
       <Footer />

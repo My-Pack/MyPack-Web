@@ -1,3 +1,5 @@
+import axios from "axios";
+import { instance } from "src/libs/api/api";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -53,8 +55,57 @@ function DesignCard() {
     const formData = new FormData();
     formData.append("file", file);
 
-    // axios
-    //   .post(`/design`, formData, {
+    console.log(localStorage.getItem("accessToken"));
+
+    instance
+      .post(`/api/v1/images`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          withCredentials: true,
+        },
+      })
+      .then((resImg) => {
+        console.log({
+          title: title,
+          content: summary,
+          imageId: (resImg as any).id,
+          color: theme,
+          theme: "christmas",
+        });
+
+        instance
+          .post(
+            `/api/v1/cards`,
+            {
+              title: title,
+              content: summary,
+              imageId: (resImg as any).id,
+              color: theme,
+              theme: "christmas",
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                withCredentials: true,
+              },
+            },
+          )
+          .then((res) => {
+            console.log(res);
+            router.push("/");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    // instance
+    //   .post(`/api/v1/cards`, formData, {
     //     headers: {
     //       "Content-Type": "multipart/form-data",
     //       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -62,7 +113,10 @@ function DesignCard() {
     //     },
     //   })
     //   .then((res) => {
-    //    res;
+    //     res;
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
     //   });
   }
   const { handleSubmit } = useForm<IImage>();

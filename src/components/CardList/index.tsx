@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import react, { useEffect, useState, Suspense } from "react";
 import Card from "src/components/Card";
 import CardEffectItem from "src/components/Card/CardEffectItem";
 import styled from "styled-components";
@@ -7,8 +7,28 @@ import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import { instance } from "src/libs/api/api";
+
+// import { is } from "../../../.next/static/chunks/amp";
+interface ICardWrappper {
+  color: string;
+  title: string;
+  content: string;
+  theme: string;
+  imageUrl: string;
+  id?: number;
+  createdAt: string;
+}
 
 function CardList() {
+  const [cardList, setCardList] = useState(null);
+  useEffect(() => {
+    instance.get("/api/v1/cards", { withCredentials: true }).then((res) => {
+      console.log((res as any).content);
+      setCardList((res as any).content);
+    });
+  }, []);
+
   return (
     <StyeldCardList>
       <StyledSwiper
@@ -22,37 +42,29 @@ function CardList() {
         slideToClickedSlide={true}
         allowTouchMove={false}
         allowSlideNext={true}
+        initialSlide={1}
         allowSlidePrev={true}
       >
-        <StyledSwiperSlide>
-          <Card
-            btn={false}
-            blur={true}
-            width="18"
-            height="24"
-            title="한강간 날"
-            subTitle="dsfasd"
-            content="It is a long established fact t is a longt is a long established fact tht is a long established fact tht is a long established fact tht is a long established fact th established fact thht is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum"
-            date="2023.06.03"
-            color="pink"
-            img="https://github.com/My-Pack/MyPack-Web/assets/63100352/958a401b-6560-4ef5-aae3-0c234eab44c2"
-          />
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <CardEffectItem />
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <CardEffectItem />
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <CardEffectItem />
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <CardEffectItem />
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <CardEffectItem />
-        </StyledSwiperSlide>
+        {cardList &&
+          (cardList as any).map((card: ICardWrappper) => (
+            <StyledSwiperSlide>
+              {({ isActive }) => (
+                <Card
+                  btn={false}
+                  blur={true}
+                  width="18"
+                  height="24"
+                  title={card.title}
+                  subTitle=""
+                  content={card.content}
+                  date={card.createdAt.substring(0, 10)}
+                  color={card.color}
+                  img={card.imageUrl}
+                  isActive={isActive}
+                />
+              )}
+            </StyledSwiperSlide>
+          ))}
       </StyledSwiper>
     </StyeldCardList>
   );

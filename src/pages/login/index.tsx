@@ -42,7 +42,7 @@ function Login() {
             />
           </GoogleOAuthProvider>
 
-          <Image src={appstore} alt="appstore" width={200} />
+          {/* <Image src={appstore} alt="appstore" width={200} /> */}
         </div>
       </StyledLoginWrapper>
     </div>
