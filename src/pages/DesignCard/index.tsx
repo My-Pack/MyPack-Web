@@ -69,17 +69,18 @@ function DesignCard() {
         console.log({
           title: title,
           content: summary,
-          imageId: resImg.id as number,
+          imageId: (resImg as any).id,
           color: theme,
           theme: "christmas",
         });
+
         instance
           .post(
             `/api/v1/cards`,
             {
               title: title,
               content: summary,
-              imageId: resImg.id as number,
+              imageId: (resImg as any).id,
               color: theme,
               theme: "christmas",
             },

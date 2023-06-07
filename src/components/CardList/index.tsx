@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import react, { useState } from "react";
 import Card from "src/components/Card";
 import CardEffectItem from "src/components/Card/CardEffectItem";
 import styled from "styled-components";
@@ -7,10 +7,17 @@ import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import { instance } from "src/libs/api/api";
 // import { is } from "../../../.next/static/chunks/amp";
 
 function CardList() {
-  return (
+  const [cardList, setCardList] = useState(false);
+  instance.get("/api/v1/cards", { withCredentials: true }).then((res) => {
+    console.log((res as any).content);
+    setCardList((res as any).content);
+  });
+
+  return cardList ? (
     <StyeldCardList>
       <StyledSwiper
         // install Swiper modules
@@ -60,7 +67,7 @@ function CardList() {
         </StyledSwiperSlide>
       </StyledSwiper>
     </StyeldCardList>
-  );
+  ) : null;
 }
 
 export default CardList;

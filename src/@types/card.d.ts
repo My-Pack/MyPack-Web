@@ -7,6 +7,10 @@ interface IGetCardData {
   content: IGetCardDataContent[];
 }
 
+interface IGetImageId {
+  id: number;
+}
+
 interface IGetCardDataContent {
   id: number;
   title: string;
