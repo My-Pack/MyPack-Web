@@ -23,7 +23,7 @@ interface ICardWrappper {
 function CardList() {
   const [cardList, setCardList] = useState(null);
   useEffect(() => {
-    instance.get("/api/v1/cards", { withCredentials: true }).then((res) => {
+    instance.get("/api/v1/cards", {params: {size:50}}).then((res) => {
       console.log((res as any).content);
       setCardList((res as any).content);
     });
