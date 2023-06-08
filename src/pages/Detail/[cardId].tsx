@@ -51,7 +51,7 @@ function Detail() {
   function onClickDelete() {
     if (confirm("카드를 삭제하시겠습니까?")) {
       instance
-        .delete(`/api/v1/cards/${cardId}`, {
+        .delete(`/api/v1/cards/${cardData.id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             withCredentials: true,
