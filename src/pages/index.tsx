@@ -1,45 +1,16 @@
-import { useState, Suspense } from "react";
+import { Suspense } from "react";
 import CardList from "src/components/CardList";
+import Loading from "src/components/Loading";
 import Footer from "src/components/Main/Footer";
 import SectionTitle from "src/components/Main/SectionTitle";
 import Nav from "src/components/Nav";
-import useGetCard from "src/hooks/api/useGetCard";
 import styled from "styled-components";
-import Loading from "src/components/Loading";
 
 function Home() {
-  const [cardData, setCardData] = useState<IGetCard | null>(null);
-
-  // const api = fetch("http://localhost:3000/design")
-  //   .then((response) => {
-  //     return response;
-  //   })
-  //   .then((json) => {
-  //     setCardData(json);
-  //   });
-
-  // 실제 서버와 연결
-  // const { card, isLoading } = useGetCard();
-
-  // Link 에는 cardId가 들어갈 예정
   return (
     <>
       <Nav />
       <StyledWrapper>
-        {/* {card?.content.map((data) => {
-          return (
-            <div onClick={onClick}>
-              <PreviewCard
-                title={data.title}
-                active={active}
-                color={data.theme.color}
-                content={data.content}
-                img={data.cardImage.s3Url}
-              />
-            </div>
-          );
-        })} */}
-
         <SectionTitle title="Today Card" subTitle="HOT" />
         <Suspense fallback={<Loading />}>
           <CardList />

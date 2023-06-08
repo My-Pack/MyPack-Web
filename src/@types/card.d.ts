@@ -1,10 +1,6 @@
 interface IGetCard {
   status: number;
-  data: IGetCardData;
-}
-
-interface IGetCardData {
-  content: IGetCardDataContent[];
+  data: IGetCardDataContent;
 }
 
 interface IGetImageId {
@@ -15,9 +11,12 @@ interface IGetCardDataContent {
   id: number;
   title: string;
   content: string;
-  cardImage: IImage;
-  theme: ITheme;
-  memberId: string;
+  color: string;
+  imageUrl: string;
+  theme: string;
+  likeCount: number;
+  commentCount: number;
+  memberName: string;
   createdAt: string;
   modifiedAt: string;
 }
