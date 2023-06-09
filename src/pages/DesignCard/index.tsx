@@ -161,11 +161,11 @@ function DesignCard() {
             onClick={() => setIsClick(true)}
             onChange={onChangeTitle}
           />
-          <Title title="부제목" subTitle="카드의 부제목을 지어주세요" />
-          <FormTitle
+          {/* <Title title="부제목" subTitle="카드의 부제목을 지어주세요" /> */}
+          {/* <FormTitle
             onClick={() => setIsClick(true)}
             onChange={onChangeSubTitle}
-          />
+          /> */}
           <FormSummary
             onClick={() => setIsClick(true)}
             onChange={onChangeSummary}
