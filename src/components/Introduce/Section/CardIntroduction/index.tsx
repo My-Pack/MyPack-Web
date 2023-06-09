@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Card from "src/components/Card";
 import SectionTitle from "src/components/Introduce/SectionTitle";
 import { defaultFadeInScaleVariants } from "src/constants/motion";
 import styled from "styled-components";
@@ -18,7 +19,18 @@ function CardIntroduction() {
           animate="animate"
           exit="exit"
         >
-          {/* <Image src={cardItem} alt="card item" width={300} /> */}
+          <Card
+            btn={false}
+            blur={false}
+            width="22"
+            height="30"
+            title="MyPack"
+            content="MyPack에서 자신만의 카드를 꾸며보세요! 🧑🏻‍💻👩🏻‍💻🐶🙂🐣💖🧡👍🏻👏🏻🏊🏻📢😎🖤🎉🕐😆💛카드의 제목, 내용, 색상등을 자신의 스타일대로 꾸밀 수 있어요. 🧑🏻‍💻👩🏻‍💻🐶🙂🐣💖🧡👍🏻👏🏻🏊🏻📢😎🖤🎉🕐😆💛다른 사람의 카드에 댓글도 남기며 서로 공유해요!🧑🏻‍💻👩🏻‍💻🐶🙂🐣💖🧡👍🏻👏🏻🏊🏻📢😎🖤🎉🕐😆💛저장버튼을 누르면 이미지로 카드를 저장할 수 있어요! 🧑🏻‍💻👩🏻‍💻🐶🙂🐣💖🧡👍🏻👏🏻🏊🏻📢😎🖤🎉🕐😆💛 !!! CZ의 시작은 MyPack !!! "
+            date="2023.06.09"
+            color="pink"
+            img="https://github.com/My-Pack/MyPack-Web/assets/63100352/2d283ef6-85eb-424b-b2eb-6c4506f2fccf"
+            isActive
+          />
         </motion.div>
       </StyledWrapper>
     </>
