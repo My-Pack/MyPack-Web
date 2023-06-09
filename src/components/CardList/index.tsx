@@ -1,15 +1,13 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import react, { useEffect, useState, Suspense } from "react";
+import { useEffect, useState } from "react";
 import Card from "src/components/Card";
-import CardEffectItem from "src/components/Card/CardEffectItem";
+import { instance } from "src/libs/api/api";
 import styled from "styled-components";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import { instance } from "src/libs/api/api";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-// import { is } from "../../../.next/static/chunks/amp";
 interface ICardWrappper {
   color: string;
   title: string;
@@ -21,7 +19,8 @@ interface ICardWrappper {
 }
 
 function CardList() {
-  const [cardList, setCardList] = useState(null);
+  const [cardList, setCardList] = useState<IGetCardDataContent | null>(null);
+
   useEffect(() => {
     instance.get("/api/v1/cards", { withCredentials: true }).then((res) => {
       console.log((res as any).content);
@@ -50,7 +49,7 @@ function CardList() {
             <StyledSwiperSlide>
               {({ isActive }) => (
                 <Card
-                  btn={false}
+                  btn={true}
                   blur={true}
                   width="18"
                   height="24"
@@ -61,6 +60,7 @@ function CardList() {
                   color={card.color}
                   img={card.imageUrl}
                   isActive={isActive}
+                  cardId={card.id}
                 />
               )}
             </StyledSwiperSlide>

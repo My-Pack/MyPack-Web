@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { atom, useRecoilState } from "recoil";
+import { instance } from "src/libs/api/api";
 
 interface IProps {
   data: IComment;
@@ -22,7 +23,7 @@ function useComment({ cardId }: IDetail) {
   async function refreshComments(id: string) {
     setIsLoading(true);
 
-    const response = await axios.get<{}, IProps>(`/card/comments/${id}`);
+    const response = await instance.get<{}, IProps>(`/card/comments/${id}`);
     setComments(response.data.comment);
     setIsLoading(false);
   }

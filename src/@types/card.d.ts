@@ -1,8 +1,3 @@
-interface IGetCard {
-  status: number;
-  data: IGetCardDataContent;
-}
-
 interface IGetImageId {
   id: number;
 }

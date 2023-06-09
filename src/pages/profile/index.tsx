@@ -29,7 +29,7 @@ function Profile() {
     };
     setTimeout(() => {
       getProfile();
-    }, 2000); // 목업서버르 위해 2초 지연
+    }, 2000); // 목업서버를 위해 2초 지연
   }, []);
 
   return profile ? (

@@ -139,6 +139,7 @@ function CardEffectItem({
         >
           {title && content && date && img && color && width && height ? (
             <Card
+              isActive
               btn={false}
               blur={false}
               title={title}
