@@ -1,5 +1,3 @@
-import axios from "axios";
-import { instance } from "src/libs/api/api";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -11,6 +9,7 @@ import HowTo from "src/components/Card/Design/HowTo";
 import PreviewCard from "src/components/Card/Design/PreviewCard";
 import Title from "src/components/Form/Title";
 import Nav from "src/components/Nav";
+import { instance } from "src/libs/api/api";
 import styled from "styled-components";
 
 function DesignCard() {
@@ -147,7 +146,6 @@ function DesignCard() {
             onClick={() => setIsClick(!isClick)}
             active={isClick ? true : false}
             title={title}
-            subTitle={subTitle}
             content={summary}
             color={theme}
             img={previewImage}
