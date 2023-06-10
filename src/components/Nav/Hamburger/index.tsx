@@ -14,7 +14,7 @@ function Hamburger() {
         <Styledhamburger isOpen={isOpen} />
       </StyledMenuWrapper>
       <StyledMenuListWrapper isOpen={isOpen}>
-        <Link href="/DesignCard">
+        <Link href="/designCard">
           <StyledMenuElement>Card Design</StyledMenuElement>
         </Link>
         <Link href="/profile">

@@ -5,7 +5,7 @@ import styled from "styled-components";
 interface IProps {
   active: boolean;
   title: string;
-  subTitle: string;
+  // subTitle: string;
   content: string;
   color: string;
   img: string;
@@ -15,7 +15,7 @@ interface IProps {
 function PreviewCard({
   active,
   title,
-  subTitle,
+  // subTitle,
   content,
   img,
   color,
@@ -31,7 +31,7 @@ function PreviewCard({
       <StyledFrame color={color}></StyledFrame>
       <StyledCardItemBackWrapper color={color}>
         <StyledTitleWrapper>{title}</StyledTitleWrapper>
-        <StyledSubTitleWrapper>{subTitle}</StyledSubTitleWrapper>
+        {/* <StyledSubTitleWrapper>{subTitle}</StyledSubTitleWrapper> */}
         <StyledContentWrapper>{content}</StyledContentWrapper>
       </StyledCardItemBackWrapper>
       <StyledCardItemWrapper color={color}>

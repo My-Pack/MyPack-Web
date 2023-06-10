@@ -1,19 +1,22 @@
-import ShareIcon from "@mui/icons-material/Share";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import Link from "next/link";
 import styled from "styled-components";
 
-//Todo : share, detail 링크 추가
+// Todo : share 링크 추가
 
-function Btn() {
+interface IProps {
+  cardId?: number;
+}
+
+function Btn({ cardId }: IProps) {
   return (
     <StyledWrapper>
-      <Link href="/Detail/1">
+      <Link href={`/Detail/${cardId}`}>
         <ZoomInIcon />
       </Link>
-      <Link href="/">
+      {/* <Link href="/">
         <ShareIcon />
-      </Link>
+      </Link> */}
     </StyledWrapper>
   );
 }

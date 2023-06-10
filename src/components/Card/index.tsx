@@ -18,6 +18,7 @@ interface IProps {
   blur: boolean;
   btn: boolean;
   isActive: boolean;
+  cardId?: number;
 }
 
 //TODO 글자수 제한
@@ -33,6 +34,7 @@ function Card({
   blur,
   btn,
   isActive,
+  cardId,
 }: IProps) {
   const [click, setClick] = useState(false);
   const router = useRouter();
@@ -119,22 +121,29 @@ function Card({
           </StyledImageWrapper>
         </StyledCardItemWrapper>
       </StyledCard>
-      {router.asPath == "/" ? (
-        <StyledBtnWrapper>
-          <button onClick={handleDownload}>
-            <SaveAltIcon />
-          </button>
-        </StyledBtnWrapper>
-      ) : (
-        ""
-      )}
+      <StyledBottomBtnWrapper>
+        {router.asPath == "/" ? (
+          <StyledBtnWrapper>
+            <button onClick={handleDownload}>
+              <SaveAltIcon />
+            </button>
+          </StyledBtnWrapper>
+        ) : (
+          ""
+        )}
 
-      {btn ? <Btn /> : " "}
+        {btn ? <Btn cardId={cardId} /> : " "}
+      </StyledBottomBtnWrapper>
     </StyledWrapper>
   );
 }
 
 export default Card;
+
+const StyledBottomBtnWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -323,7 +332,7 @@ const StyledContentBlurWrapper = styled.div`
 const StyledContentBlur = styled.div`
   position: absolute;
   backdrop-filter: blur(0.3125rem);
-  height: 19rem;
+  height: 22rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

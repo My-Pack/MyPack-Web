@@ -1,14 +1,12 @@
 import { useRouter } from "next/router";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CardEffectItem from "src/components/Card/CardEffectItem";
 import Nav from "src/components/Nav";
 import SinglePageLikeList from "src/components/SinglePageLikeList";
-import useComment from "src/hooks/api/useComment";
-import useTextArea from "src/hooks/useTextArea";
-import styled from "styled-components";
 import useModal from "src/hooks/useModal";
+import useTextArea from "src/hooks/useTextArea";
 import { instance } from "src/libs/api/api";
-// import { card } from "public/assets/images/card.png";
+import styled from "styled-components";
 
 function Detail() {
   const {
@@ -18,16 +16,14 @@ function Detail() {
   const router = useRouter();
 
   let { isReady } = useRouter();
-  console.log(isReady);
+
   const [cardData, setCardData] = useState<any>(null);
+
   useEffect(() => {
     if (isReady === true) {
-      console.log(isReady);
       instance
         .get(`/api/v1/cards/${cardId}`, { withCredentials: true })
         .then((res) => {
-          console.log(cardId);
-          console.log(res);
           setCardData(res);
         });
     }
@@ -35,19 +31,20 @@ function Detail() {
 
   const { visible, updateVisible } = useModal();
   const { value, onChange, clearValue } = useTextArea({});
-  const { createComment, deleteComment, comments } = useComment({ cardId });
+  // const { createComment, deleteComment, comments } = useComment({ cardId });
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    createComment(value);
-    clearValue();
-  }
+  // function onSubmit(e: FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+  //   createComment(value);
+  //   clearValue();
+  // }
 
-  function onClickDeleteBtn(id: string) {
-    if (confirm("댓글을 삭제하시겠습니까?")) {
-      deleteComment(id);
-    }
-  }
+  // function onClickDeleteBtn(id: string) {
+  //   if (confirm("댓글을 삭제하시겠습니까?")) {
+  //     deleteComment(id);
+  //   }
+  // }
+
   function onClickDelete() {
     if (confirm("카드를 삭제하시겠습니까?")) {
       instance
@@ -57,7 +54,7 @@ function Detail() {
             withCredentials: true,
           },
         })
-        .then((res) => {
+        .then(() => {
           alert("카드가 삭제되었습니다.");
           router.push("/");
         })
@@ -67,18 +64,16 @@ function Detail() {
 
   return cardData ? (
     <>
-      {/*styledCommentWrapper안에 넣었더니 중앙으로 이동하지 못해서 잠시 여기다 두었습니다 괜찮을까요? */}
       <SinglePageLikeList visible={visible} onClickClose={updateVisible} />
       <Nav />
       <StyledWrapper>
         <StyledItemWrapper>
           <StyledCardWrapper>
-            {/* 디테일 카드가 들어갈 곳 */}
             <CardEffectItem
               width="25"
               height="37"
               title={cardData.title}
-              content="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum"
+              content={cardData.content}
               date={cardData.createdAt.substring(0, 10)}
               color={cardData.color}
               img={cardData.imageUrl}
@@ -106,13 +101,14 @@ function Detail() {
                 </StyledCommentUl>
               </StyledCommentList>
               <div className="like" onClick={updateVisible}>
-                좋아요 {cardData.likeCount}개
+                좋아요 {cardData?.likeCount}개
               </div>
               <div className="like" onClick={onClickDelete}>
                 카드 삭제
               </div>
 
-              <StyledForm onSubmit={onSubmit}>
+              {/* <StyledForm onSubmit={onSubmit}> */}
+              <StyledForm>
                 <textarea
                   placeholder="댓글 달기..."
                   value={value}
@@ -173,6 +169,8 @@ const StyledCommentItem = styled.div`
   }
   .like {
     margin-top: 1.875rem;
+    padding-top: 0.7rem;
+    padding-left: 2rem;
     cursor: pointer;
     &:hover {
       color: ${({ theme }) => theme.color.grey50};
